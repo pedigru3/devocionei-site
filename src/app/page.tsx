@@ -1,100 +1,117 @@
 import Image from "next/image";
+import Logo from "@/images/devocionei.png"
 
 export default function Home() {
-  return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="https://nextjs.org/icons/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="https://nextjs.org/icons/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+
+  return (
+    <div className="flex flex-col items-center justify-center min-h-screen p-8">
+      <header className="text-center mb-4">
+        <div className="flex justify-center">
+
         </div>
+        <h1 className="text-4xl font-bold">Devocionei</h1>
+        <p className="mt-2 text-lg">Seu devocional personalizado para meditar nas escrituras.</p>
+      </header>
+      
+      <main className="flex flex-col items-center">
+        <Image
+            className="mb-8"
+            src={Logo}
+            alt="Logo Devocionei"
+            width={250}
+            height={250}
+          />
+        <p className="text-center mb-6">
+          Com o Devocionei, você pode inserir seu versículo e receber perguntas que ajudam na reflexão e aprendizado.
+        </p>
+        <button
+          className="bg-primary mt-4 rounded-full text-background py-2 px-8 hover:bg-blue-700 transition"
+        >
+          Baixe agora
+        </button>
       </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
+
+      {/* Benefícios Section */}
+      <section className="mt-4 py-12 rounded-lg px-8">
+        <h2 className="text-3xl font-semibold text-center mb-12">
+          Por que usar o Devocionei?
+        </h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {/* Benefício 1 */}
+          <div className="flex flex-col items-center">
+            <svg 
+              xmlns="http://www.w3.org/2000/svg" 
+              fill="none" 
+              viewBox="0 0 24 24" 
+              stroke-width="1.5" 
+              stroke="currentColor" 
+              className="w-12 h-12 text-primary"
+            >
+              {/* Ícone representando o benefício 1 */}
+              <path 
+                stroke-linecap="round" 
+                stroke-linejoin="round" 
+                d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A48.117 48.117 0 0012 20.5c1.052 0 2.062-.18 3-.512V6.042z" 
+              />
+            </svg>
+            <h3 className="text-xl font-medium mt-4">Reflexão Profunda</h3>
+            <p className="text-center mt-2">
+              Perguntas cuidadosamente elaboradas para te guiar em uma meditação mais profunda.
+            </p>
+          </div>
+
+          {/* Benefício 2 */}
+          <div className="flex flex-col items-center">
+            <svg 
+              xmlns="http://www.w3.org/2000/svg" 
+              fill="none" 
+              viewBox="0 0 24 24" 
+              stroke-width="1.5" 
+              stroke="currentColor" 
+              className="w-12 h-12 text-primary"
+            >
+              {/* Ícone representando o benefício 2 */}
+              <path 
+                stroke-linecap="round" 
+                stroke-linejoin="round" 
+                d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125m-1.687 1.688l-1.687 1.688" 
+              />
+            </svg>
+            <h3 className="text-xl font-medium mt-4">Personalizado</h3>
+            <p className="text-center mt-2">
+              Insira seus próprios versículos e personalize sua experiência devocional.
+            </p>
+          </div>
+
+          {/* Benefício 3 */}
+          <div className="flex flex-col items-center">
+            <svg 
+              xmlns="http://www.w3.org/2000/svg" 
+              fill="none" 
+              viewBox="0 0 24 24" 
+              stroke-width="1.5" 
+              stroke="currentColor" 
+              className="w-12 h-12 text-primary"
+            >
+              {/* Ícone representando o benefício 3 */}
+              <path 
+                stroke-linecap="round" 
+                stroke-linejoin="round" 
+                d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" 
+              />
+            </svg>
+            <h3 className="text-xl font-medium mt-4">Fácil de Usar</h3>
+            <p className="text-center mt-2">
+              Interface simples e intuitiva para uma experiência devocional tranquila.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <footer className="mt-12 text-center">
+        <a href="/privacy">Política de Privacidade</a>
+        <p className="pt-2">© 2023 Devocionei. Todos os direitos reservados.</p>
       </footer>
     </div>
   );
