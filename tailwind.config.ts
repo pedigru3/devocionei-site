@@ -11,7 +11,24 @@ const config: Config = {
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
-        primary: "var(--primary)"
+        primary: {
+          DEFAULT: "var(--primary)",
+          hover: "var(--primary-hover)",
+        },
+        text: {
+          primary: "var(--text-primary)",
+          secondary: "var(--text-secondary)",
+          disabled: "var(--text-disabled)",
+        },
+        surface: {
+          DEFAULT: "var(--surface)",
+          hover: "var(--surface-hover)",
+          secondary: "var(--surface-secondary)",
+        },
+        border: {
+          DEFAULT: "var(--border)",
+          focus: "var(--border-focus)",
+        },
       },
     },
   },
