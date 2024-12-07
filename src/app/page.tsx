@@ -4,7 +4,6 @@ import Link from "next/link";
 
 export default function Home() {
 
-
   return (
     <div className="flex flex-col items-center justify-center min-h-screen p-8">
       <header className="text-center mb-4">
@@ -22,6 +21,7 @@ export default function Home() {
             alt="Logo Devocionei"
             width={250}
             height={250}
+            priority
           />
         <p className="text-center mb-6">
           Com o Devocionei, você pode inserir seu versículo e receber perguntas que ajudam na reflexão e aprendizado.

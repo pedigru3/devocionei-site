@@ -3,24 +3,57 @@
 @tailwind utilities;
 
 :root {
+  /* Cores base */
   --background: #ffffff;
   --foreground: #171717;
   
+  /* Cores do tema */
   --primary: #04BF9D;
+  --primary-hover: #03a88b;
+  
+  /* Cores de estado */
+  --disabled: #9ca3af;
+  --disabled-bg: #f3f4f6;
+  
+  /* Cores de texto */
+  --text-primary: var(--foreground);
+  --text-secondary: #4b5563;
+  --text-disabled: var(--disabled);
+  
+  /* Cores de borda */
+  --border: #e5e7eb;
+  --border-focus: var(--primary);
+  
+  /* Cores de superfície */
+  --surface: #ffffff;
+  --surface-hover: #f9fafb;
+  --surface-secondary: #f3f4f6;
 }
-
 
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;
     --foreground: #ededed;
-
+    
     --primary: #04BF9D;
+    --primary-hover: #05d6b1;
+    
+    --disabled: #4b5563;
+    --disabled-bg: #1f2937;
+    
+    --text-primary: var(--foreground);
+    --text-secondary: #9ca3af;
+    
+    --border: #374151;
+    
+    --surface: #111827;
+    --surface-hover: #1f2937;
+    --surface-secondary: #1f2937;
   }
 }
 
 body {
-  color: var(--foreground);
+  color: var(--text-primary);
   background: var(--background);
   font-family: Arial, Helvetica, sans-serif;
 }
