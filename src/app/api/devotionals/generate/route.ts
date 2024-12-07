@@ -1,14 +1,14 @@
 import { OpenAI } from 'openai'
 import { NextResponse } from 'next/server'
-import { fetchBibleVerses } from '@/lib/bible-api'
 import { DevotionalRepository } from '@/repositories/devotional-repository'
 import { auth } from '@clerk/nextjs/server'
 import prisma from '@/lib/prisma'
-import { formatReference } from '@/utils/bible-reference'
+import { formatReference, parseReference } from '@/lib/bible-utils'
 
 const configuration = {
   apiKey: process.env.OPENAI_API_KEY,
 }
+
 const openai = new OpenAI(configuration)
 const devotionalRepository = new DevotionalRepository()
 
@@ -23,10 +23,34 @@ export async function POST(request: Request) {
   }
 
   try {
-    const { book, chapter, startVerse, endVerse } = await request.json()
-    const reference = formatReference({ book, chapter, startVerse, endVerse })
+    const { reference } = await request.json()
 
-    const bibleData = await fetchBibleVerses(book, chapter, startVerse, endVerse)
+    // Validar se a referência existe
+    if (!reference) {
+      return NextResponse.json(
+        { error: 'Reference is required' },
+        { status: 400 }
+      )
+    }
+
+    // Tentar fazer o parse da referência
+    let parsed
+    try {
+      parsed = parseReference(reference)
+    } catch (error) {
+      return NextResponse.json(
+        { error: 'Invalid reference format' },
+        { status: 400 }
+      )
+    }
+
+    // Validar se todos os campos necessários existem
+    if (!parsed.book || !parsed.chapter || !parsed.startVerse) {
+      return NextResponse.json(
+        { error: 'Invalid reference: missing required fields' },
+        { status: 400 }
+      )
+    }
 
     const completion = await openai.chat.completions.create({
       model: "gpt-3.5-turbo",
@@ -37,7 +61,7 @@ export async function POST(request: Request) {
         },
         {
           role: "user",
-          content: `Crie uma devocional baseada em ${book} ${chapter}:${startVerse}-${endVerse}. 
+          content: `Crie uma devocional baseada em ${reference}. 
           Inclua: 
           1. Uma breve contextualização
           2. Uma pergunta sobre o contexto
@@ -62,7 +86,7 @@ export async function POST(request: Request) {
 
     const devotional = await devotionalRepository.create({
       userId,
-      reference,
+      reference: formatReference(parsed),
       content: devotionalContent || '',
     })
 
@@ -74,4 +98,4 @@ export async function POST(request: Request) {
       { status: 500 }
     )
   }
-} 
+}

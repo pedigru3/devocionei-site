@@ -5,9 +5,7 @@ import Link from 'next/link'
 
 interface Devotional {
   id: string
-  book: string
-  chapter: number
-  verse: number
+  reference: string
   completed: boolean
   createdAt: string
 }
@@ -67,7 +65,7 @@ export function DevotionalList({ userId }: { userId: string }) {
           <div className="flex justify-between items-center">
             <div>
               <h2 className="text-xl font-semibold text-text-primary mb-2">
-                {devotional.book} {devotional.chapter}:{devotional.verse}
+                {devotional.reference}
               </h2>
               <p className="text-text-secondary">
                 {new Date(devotional.createdAt).toLocaleDateString('pt-BR')}

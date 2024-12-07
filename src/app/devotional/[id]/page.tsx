@@ -2,11 +2,14 @@ import { DevotionalRepository } from '@/repositories/devotional-repository'
 import { notFound } from 'next/navigation'
 import { bibleBooks } from '@/config/bible'
 import { DevotionalCompletion } from '@/components/DevotionalCompletion'
-import { parseReference } from '@/utils/bible-reference'
+import { parseReference } from '@/lib/bible-utils'
 
 async function getDevotional(id: string) {
   const repository = new DevotionalRepository()
   const devotional = await repository.findById(id)
+  console.log('DEVOTIONAL ---------------------------- DEVOTIONAL')
+  console.log('DEVOTIONAL ---------------------------- DEVOTIONAL')
+  console.log('devotional', devotional)
   
   if (!devotional) {
     notFound()

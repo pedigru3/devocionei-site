@@ -13,8 +13,6 @@ export function normalizeText(text: string): string {
 // Função para encontrar o livro pelo nome ou abreviatura
 export function findBook(bookInput: string): typeof bibleBooks[number] | undefined {
   const normalizedInput = normalizeText(bookInput)
-
-  console.log(normalizedInput)
   
   // Primeiro tenta encontrar por match exato da abreviatura
   const exactAbbrevMatch = bibleBooks.find(book => 
@@ -51,9 +49,11 @@ export function parseBibleReference(reference: string): ParsedReference {
 
   // Regex atualizada para capturar diferentes formatos
   // Aceita: "1 Coríntios 13:4-7", "1Co 13:4-7", "1 Co 13.4-7"
-  const regex = /^((?:[123]\s+)?[\wÀ-ú\s]+)\s*(\d+)[:.]\s*(\d+)(?:-(\d+))?$/i
+  const regex = /^((?:[123]\s+)?[\wÀ-ú]+)\s+(\d+)[:.]\s*(\d+)(?:-(\d+))?$/i
+
   const match = reference.trim().match(regex)
 
+  console.log('match', match)
   if (!match) return result
 
   const [, bookName, chapter, startVerse, endVerse] = match
@@ -78,3 +78,36 @@ export function parseBibleReference(reference: string): ParsedReference {
 
   return result
 } 
+
+export function formatReference(reference: ParsedReference): string {
+  if (!reference.book || !reference.chapter || !reference.startVerse) {
+    return ''
+  }
+
+  // Usa findBook para pegar o nome completo do livro
+  const book = findBook(reference.book)
+  const bookName = book ? book.name : reference.book
+
+  return reference.startVerse === reference.endVerse
+    ? `${bookName} ${reference.chapter}.${reference.startVerse}`
+    : `${bookName} ${reference.chapter}.${reference.startVerse}-${reference.endVerse}`
+} 
+
+export function parseReference(reference: string): ParsedReference {
+  const regex = /^([\w\s]+)\s+(\d+)[.:](\d+)(?:\-(\d+))?$/i
+  const match = reference.trim().match(regex)
+
+  console.log('match', match)
+  
+  if (!match) {
+    throw new Error('Invalid reference format')
+  }
+
+  const [, book, chapter, startVerse, endVerse] = match
+  return {
+    book: book.trim(),
+    chapter: parseInt(chapter, 10),
+    startVerse: parseInt(startVerse, 10),
+    endVerse: endVerse ? parseInt(endVerse, 10) : parseInt(startVerse, 10)
+  }
+}
