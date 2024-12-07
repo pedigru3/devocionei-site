@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Logo from "@/images/devocionei.webp"
+import Link from "next/link";
 
 export default function Home() {
 
@@ -25,11 +26,12 @@ export default function Home() {
         <p className="text-center mb-6">
           Com o Devocionei, você pode inserir seu versículo e receber perguntas que ajudam na reflexão e aprendizado.
         </p>
-        <button
+        <Link
+          href="https://app.devocionei.com.br"
           className="bg-primary mt-4 rounded-full text-background py-2 px-8 hover:bg-blue-700 transition"
         >
-          Baixe agora
-        </button>
+          Acesse agora
+        </Link>
       </main>
 
       {/* Benefícios Section */}
