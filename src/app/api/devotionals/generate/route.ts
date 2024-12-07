@@ -1,9 +1,10 @@
 import { OpenAI } from 'openai'
 import { NextResponse } from 'next/server'
-import { fetchBibleVerse } from '@/lib/bible-api'
+import { fetchBibleVerses } from '@/lib/bible-api'
 import { DevotionalRepository } from '@/repositories/devotional-repository'
 import { auth } from '@clerk/nextjs/server'
 import prisma from '@/lib/prisma'
+import { formatReference } from '@/utils/bible-reference'
 
 const configuration = {
   apiKey: process.env.OPENAI_API_KEY,
@@ -22,9 +23,10 @@ export async function POST(request: Request) {
   }
 
   try {
-    const { book, chapter, verse } = await request.json()
+    const { book, chapter, startVerse, endVerse } = await request.json()
+    const reference = formatReference({ book, chapter, startVerse, endVerse })
 
-    const bibleData = await fetchBibleVerse(book, chapter, verse)
+    const bibleData = await fetchBibleVerses(book, chapter, startVerse, endVerse)
 
     const completion = await openai.chat.completions.create({
       model: "gpt-3.5-turbo",
@@ -35,7 +37,7 @@ export async function POST(request: Request) {
         },
         {
           role: "user",
-          content: `Crie uma devocional baseada em ${bibleData.book.name} ${chapter}:${verse}. 
+          content: `Crie uma devocional baseada em ${book} ${chapter}:${startVerse}-${endVerse}. 
           Inclua: 
           1. Uma breve contextualização
           2. Uma pergunta sobre o contexto
@@ -60,9 +62,7 @@ export async function POST(request: Request) {
 
     const devotional = await devotionalRepository.create({
       userId,
-      book: bibleData.book.name,
-      chapter,
-      verse,
+      reference,
       content: devotionalContent || '',
     })
 

@@ -3,27 +3,41 @@
 const BIBLE_API_URL = 'https://www.abibliadigital.com.br/api'
 const API_TOKEN = process.env.BIBLE_API_KEY
 
-export async function fetchBibleVerse(book: string, chapter: number, verse: number) {
-  console.log('API_TOKEN', API_TOKEN)
-  console.log(API_TOKEN)
-  const response = await fetch(
-    `${BIBLE_API_URL}/verses/nvi/${book}/${chapter}/${verse}`,
-    {
-      headers: {
-        Authorization: `Bearer ${API_TOKEN}`,
-      },
-    }
-  )
-
-  if (!response.ok) {
-    throw new Error('Failed to fetch bible verse')
+interface BibleVerseResponse {
+  text: string
+  book: {
+    name: string
   }
-
-  const data = await response.json()
-  return data
 }
 
-// Lista de livros disponíveis
+export async function fetchBibleVerses(book: string, chapter: number, startVerse: number, endVerse: number) {
+  try {
+    const verses = []
+    for (let verse = startVerse; verse <= endVerse; verse++) {
+      const response = await fetch(
+        `${BIBLE_API_URL}/verses/nvi/${book}/${chapter}/${verse}`,
+        {
+          headers: {
+            Authorization: `Bearer ${API_TOKEN}`,
+          },
+        }
+      )
+
+      if (!response.ok) {
+        throw new Error(`Failed to fetch bible verse ${verse}`)
+      }
+
+      const data: BibleVerseResponse = await response.json()
+      verses.push(data)
+    }
+    return verses
+  } catch (error) {
+    console.error('Error fetching bible verses:', error)
+    throw error
+  }
+}
+
+// Lista de livros disponíveis permanece inalterada
 export async function fetchBibleBooks() {
   const response = await fetch(`${BIBLE_API_URL}/books`, {
     headers: {
@@ -39,7 +53,7 @@ export async function fetchBibleBooks() {
   return data
 }
 
-// Buscar capítulos de um livro
+// Buscar capítulos de um livro permanece inalterada
 export async function fetchBookChapters(book: string) {
   const response = await fetch(`${BIBLE_API_URL}/books/${book}`, {
     headers: {
@@ -53,4 +67,4 @@ export async function fetchBookChapters(book: string) {
 
   const data = await response.json()
   return data.chapters
-} 
+}

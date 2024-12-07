@@ -2,6 +2,7 @@ import { DevotionalRepository } from '@/repositories/devotional-repository'
 import { notFound } from 'next/navigation'
 import { bibleBooks } from '@/config/bible'
 import { DevotionalCompletion } from '@/components/DevotionalCompletion'
+import { parseReference } from '@/utils/bible-reference'
 
 async function getDevotional(id: string) {
   const repository = new DevotionalRepository()
@@ -11,12 +12,7 @@ async function getDevotional(id: string) {
     notFound()
   }
 
-  const book = bibleBooks.find(b => b.abbrev.pt === devotional.book)
-  
-  return {
-    ...devotional,
-    bookName: book?.name || devotional.book
-  }
+  return devotional
 }
 
 export default async function DevotionalPage({
@@ -25,6 +21,8 @@ export default async function DevotionalPage({
   params: { id: string }
 }) {
   const devotional = await getDevotional(params.id)
+  const parsedReference = parseReference(devotional.reference)
+  const book = bibleBooks.find(b => b.abbrev.pt === parsedReference.book)
 
   return (
     <main className="min-h-screen py-12 px-4">
@@ -34,7 +32,11 @@ export default async function DevotionalPage({
             Devocional
           </h1>
           <p className="text-text-secondary">
-            {devotional.bookName} {devotional.chapter}:{devotional.verse}
+            {book?.name || parsedReference.book} {parsedReference.chapter}:
+            {parsedReference.startVerse}
+            {parsedReference.endVerse !== parsedReference.startVerse 
+              ? `-${parsedReference.endVerse}` 
+              : ''}
           </p>
         </header>
 

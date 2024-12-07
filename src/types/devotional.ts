@@ -1,9 +1,7 @@
 export interface Devotional {
   id: string
   userId: string
-  book: string
-  chapter: number
-  verse: number
+  reference: string
   content: string
   reflection?: string
   completed: boolean
