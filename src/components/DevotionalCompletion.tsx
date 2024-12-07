@@ -2,6 +2,12 @@
 
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
+import dynamic from 'next/dynamic'
+
+const TextEditor = dynamic(() => import('./TextEditor'), {
+  ssr: false,
+  loading: () => <p>Carregando editor...</p>
+})
 
 interface DevotionalCompletionProps {
   devotionalId: string
@@ -12,6 +18,19 @@ export function DevotionalCompletion({ devotionalId }: DevotionalCompletionProps
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [error, setError] = useState('')
   const router = useRouter()
+  const maxChars = 500
+
+  // Função simplificada para contar caracteres
+  const getCharCount = (html: string) => {
+    return html.replace(/<[^>]*>/g, '').trim().length
+  }
+
+  const handleEditorChange = (newContent: string) => {
+    console.log('Editor changed:', newContent) // Debug
+    setReflection(newContent)
+  }
+
+  const charCount = getCharCount(reflection)
 
   const handleComplete = async () => {
     if (!reflection.trim()) {
@@ -35,8 +54,8 @@ export function DevotionalCompletion({ devotionalId }: DevotionalCompletionProps
         throw new Error('Falha ao marcar como concluído')
       }
 
-      router.refresh() // Atualiza os dados da página
-      router.push('/devotionals') // Redireciona para a lista
+      router.refresh()
+      router.push('/devotionals')
     } catch (error) {
       console.error('Error completing devotional:', error)
       setError('Ocorreu um erro ao marcar como concluído. Tente novamente.')
@@ -50,14 +69,10 @@ export function DevotionalCompletion({ devotionalId }: DevotionalCompletionProps
       <h2 className="text-xl font-semibold mb-4 text-text-primary">
         Sua Reflexão
       </h2>
-      <textarea
-        className="w-full p-3 bg-surface-secondary border border-border rounded-lg focus:ring-2 focus:ring-primary focus:border-primary"
-        rows={4}
-        placeholder="Escreva aqui suas reflexões sobre este devocional..."
-        value={reflection}
-        onChange={(e) => setReflection(e.target.value)}
-        disabled={isSubmitting}
-      />
+      <TextEditor value={reflection} onChange={handleEditorChange} />
+      <p className="text-sm text-text-secondary">
+        {charCount}/{maxChars} caracteres
+      </p>
       {error && (
         <p className="mt-2 text-red-500 text-sm">
           {error}
@@ -65,7 +80,7 @@ export function DevotionalCompletion({ devotionalId }: DevotionalCompletionProps
       )}
       <button
         onClick={handleComplete}
-        disabled={isSubmitting}
+        disabled={isSubmitting || charCount > maxChars}
         className="mt-4 bg-primary hover:bg-primary-hover text-white px-6 py-2 rounded-lg disabled:bg-disabled disabled:text-text-disabled transition-colors"
       >
         {isSubmitting ? 'Salvando...' : 'Marcar como Concluído'}

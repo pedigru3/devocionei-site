@@ -5,8 +5,12 @@ import { auth } from '@clerk/nextjs/server'
 import prisma from '@/lib/prisma'
 import { formatReference, parseReference } from '@/lib/bible-utils'
 
+
 const configuration = {
   apiKey: process.env.OPENAI_API_KEY,
+  response_format: {
+    type: 'json_object',
+  },
 }
 
 const openai = new OpenAI(configuration)
@@ -57,16 +61,24 @@ export async function POST(request: Request) {
       messages: [
         {
           role: "system",
-          content: "Você é um assistente especializado em criar devocionais cristãos reflexivos e profundos. Você é cristocentrico e sabe como tudo aponta para Cristo. Você se inspira muito ao falar no pastor Jonas Madureira."
+          content: "Você é um assistente especializado em criar perguntas cristãos reflexivas e profundas. Você é cristocentrico e sabe como tudo aponta para Cristo."
         },
         {
           role: "user",
-          content: `Crie uma devocional baseada em ${reference}. 
-          Inclua: 
-          1. Uma breve contextualização
-          2. Uma pergunta sobre o contexto
-          3. Uma pergunta sobre a aplicação prática
-          4. Uma sugestão de oração`
+          content: `
+              Seu objetivo é ajudar o usuário com perguntas que aprofundam sua compreensão do texto bíblico, 
+              levando-o a refletir e aplicar os ensinamentos à sua vida, 
+              mantendo sempre um enfoque cristocêntrico.
+
+              Aqui está um exemplo de como você deve responder:
+              "[{\"step\": \"Compreensão\", \"answers\": [\"O que Paulo está instruindo os crentes a fazerem em relação ao seu comportamento e testemunho?\", \""Por que Paulo destaca a importância de estar 'firmes em um só espírito' neste contexto?"\", \"Como Paulo descreve a relação entre fé e sofrimento por Cristo neste trecho?\"]}, {\"step\": \"Reflexão Pessoal\", \"answers\": [\"Em sua vida, você sente que está se portando dignamente conforme o evangelho de Cristo? O que poderia melhorar?\", \"Como você lida com a ideia de 'padecer por Cristo'? Isso causa temor ou te encoraja a ser mais firme na fé?\"]}, {\"step\": \"Aplicação Prática\", \"answers\": [\"O que significa para você 'estar firme em um só espírito' com outros crentes? Como você pode promover essa unidade em sua comunidade?\", \"Como você pode enfrentar desafios e adversidades de maneira que mostre sua confiança em Deus e o poder do evangelho?\"]}]"
+              `
+        },
+        {
+          role: "user",
+          content: `
+              Responda baseado em ${reference}, seguindo sua estrutura:
+          `
         }
       ],
     })

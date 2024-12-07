@@ -53,7 +53,6 @@ export function parseBibleReference(reference: string): ParsedReference {
 
   const match = reference.trim().match(regex)
 
-  console.log('match', match)
   if (!match) return result
 
   const [, bookName, chapter, startVerse, endVerse] = match
@@ -96,8 +95,6 @@ export function formatReference(reference: ParsedReference): string {
 export function parseReference(reference: string): ParsedReference {
   const regex = /^([\w\s]+)\s+(\d+)[.:](\d+)(?:\-(\d+))?$/i
   const match = reference.trim().match(regex)
-
-  console.log('match', match)
   
   if (!match) {
     throw new Error('Invalid reference format')
