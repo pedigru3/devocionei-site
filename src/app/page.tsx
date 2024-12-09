@@ -11,7 +11,7 @@ export default function Home() {
 
         </div>
         <h1 className="text-4xl font-bold">Devocionei</h1>
-        <p className="mt-2 text-lg">Seu devocional personalizado para meditar nas escrituras.</p>
+        <p className="mt-2 text-lg">Seu verdadeiro guia de devocionais</p>
       </header>
       
       <main className="flex flex-col items-center">
