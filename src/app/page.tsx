@@ -235,7 +235,7 @@ export default function Home() {
                     d="M8.25 3v1.5M4.5 8.25H3m18 0h-1.5M4.5 12H3m18 0h-1.5m-15 3.75H3m18 0h-1.5M8.25 19.5V21M12 3v1.5m0 15V21m3.75-18v1.5m0 15V21m-9-1.5h10.5a2.25 2.25 0 002.25-2.25V6.75a2.25 2.25 0 00-2.25-2.25H6.75A2.25 2.25 0 004.5 6.75v10.5a2.25 2.25 0 002.25 2.25zm.75-12h9v9h-9v-9z" 
                   />
                 </svg>
-                <h3 className="text-xl font-medium mt-4">Ferramentas de Discipulado</h3>
+                <h3 className="text-xl font-medium mt-4 text-center">Ferramentas de Discipulado</h3>
                 <p className="text-center mt-2">
                   Recursos específicos para líderes guiarem seus grupos em estudos bíblicos e crescimento espiritual conjunto.
                 </p>
@@ -542,8 +542,8 @@ export default function Home() {
               </div>
               
               <div className="bg-white dark:bg-gray-900 p-6 rounded-lg shadow-sm">
-                <h3 className="text-xl font-medium mb-3">Preciso ter uma igreja ou grupo para usar o Devocionei?</h3>
-                <p>Não é obrigatório. Você pode usar o Devocionei individualmente, mas a experiência é aprimorada quando utilizada em comunidade com seu grupo, célula ou igreja.</p>
+                <h3 className="text-xl font-medium mb-3">Preciso fazer parte de um grupo para usar o Devocionei?</h3>
+                <p>Nós acreditamos que Deus nos chama a viver em comunidade. Embora você possa usar o Devocionei individualmente, a experiência é muito mais rica quando compartilhada com seu grupo, célula ou igreja.</p>
               </div>
               
               <div className="bg-white dark:bg-gray-900 p-6 rounded-lg shadow-sm">
@@ -552,18 +552,18 @@ export default function Home() {
               </div>
               
               <div className="bg-white dark:bg-gray-900 p-6 rounded-lg shadow-sm">
-                <h3 className="text-xl font-medium mb-3">Quais versões da Bíblia estão disponíveis?</h3>
-                <p>O Devocionei oferece diversas traduções em português como NVI, ARA, NAA, NTLH e outras. Também temos versões em inglês, espanhol e outros idiomas.</p>
+                <h3 className="text-xl font-medium mb-3">Preciso ter uma Bíblia para usar o Devocionei?</h3>
+                <p>Sim, o Devocionei é uma ferramenta para acompanhar sua leitura bíblica e compartilhar devocionais. Atualmente, você precisará ter sua própria Bíblia, seja física ou digital, para fazer as leituras. A integração com textos bíblicos está em nossos planos futuros.</p>
               </div>
               
               <div className="bg-white dark:bg-gray-900 p-6 rounded-lg shadow-sm">
                 <h3 className="text-xl font-medium mb-3">Posso usar o Devocionei offline?</h3>
-                <p>Sim! O aplicativo permite baixar os planos de leitura e conteúdos para acesso offline. As interações com seu grupo serão sincronizadas quando você estiver conectado novamente.</p>
+                <p>Não, o Devocionei requer uma conexão com a internet para funcionar. Isso garante que você sempre tenha acesso aos devocionais mais recentes e possa interagir em tempo real com sua comunidade.</p>
               </div>
               
               <div className="bg-white dark:bg-gray-900 p-6 rounded-lg shadow-sm">
                 <h3 className="text-xl font-medium mb-3">Como faço para criar um plano de leitura personalizado?</h3>
-                <p>Na área de administrador do grupo, selecione &ldquo;Criar Plano&rdquo;, escolha os livros ou capítulos desejados, defina o período e personalize as metas diárias. É simples e rápido!</p>
+                <p>Na área de administrador do grupo, selecione &ldquo;Novo Plano&rdquo;, escolha um Livro ou Tema bíblico, defina o período e escreva uma descrição para o plano. É simples e rápido!</p>
               </div>
             </div>
           </section>
