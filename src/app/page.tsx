@@ -59,10 +59,10 @@ export default function Home() {
               },
               {
                 "@type": "Question",
-                "name": "Preciso ter uma igreja ou grupo para usar o Devocionei?",
+                "name": "Preciso fazer parte de um grupo para usar o Devocionei?",
                 "acceptedAnswer": {
                   "@type": "Answer",
-                  "text": "Não é obrigatório. Você pode usar o Devocionei individualmente, mas a experiência é aprimorada quando utilizada em comunidade com seu grupo, célula ou igreja."
+                  "text": "Nós acreditamos que Deus nos chama a viver em comunidade. Embora você possa usar o Devocionei individualmente, a experiência é muito mais rica quando compartilhada com seu grupo, célula ou igreja."
                 }
               },
               {
@@ -75,10 +75,10 @@ export default function Home() {
               },
               {
                 "@type": "Question",
-                "name": "Quais versões da Bíblia estão disponíveis?",
+                "name": "Preciso ter uma Bíblia para usar o Devocionei?",
                 "acceptedAnswer": {
                   "@type": "Answer",
-                  "text": "O Devocionei oferece diversas traduções em português como NVI, ARA, NAA, NTLH e outras. Também temos versões em inglês, espanhol e outros idiomas."
+                  "text": "Sim, o Devocionei é uma ferramenta para acompanhar sua leitura bíblica e compartilhar devocionais. Atualmente, você precisará ter sua própria Bíblia, seja física ou digital, para fazer as leituras. A integração com textos bíblicos está em nossos planos futuros."
                 }
               },
               {
@@ -86,7 +86,7 @@ export default function Home() {
                 "name": "Posso usar o Devocionei offline?",
                 "acceptedAnswer": {
                   "@type": "Answer",
-                  "text": "Sim! O aplicativo permite baixar os planos de leitura e conteúdos para acesso offline. As interações com seu grupo serão sincronizadas quando você estiver conectado novamente."
+                  "text": "Não, o Devocionei requer uma conexão com a internet para funcionar. Isso garante que você sempre tenha acesso aos devocionais mais recentes e possa interagir em tempo real com sua comunidade."
                 }
               },
               {
@@ -94,7 +94,7 @@ export default function Home() {
                 "name": "Como faço para criar um plano de leitura personalizado?",
                 "acceptedAnswer": {
                   "@type": "Answer",
-                  "text": "Na área de administrador do grupo, selecione &ldquo;Criar Plano&rdquo;, escolha os livros ou capítulos desejados, defina o período e personalize as metas diárias. É simples e rápido!"
+                  "text": "Na área de administrador do grupo, selecione &ldquo;Novo Plano&rdquo;, escolha um Livro ou Tema bíblico, defina o período e escreva uma descrição para o plano. É simples e rápido!"
                 }
               }
             ]
