@@ -3,21 +3,27 @@
 import Image from "next/image";
 import Logo from "@/images/devocionei.webp"
 import Script from "next/script";
-import { useState } from "react";
 
 export default function Home() {
-  const [showModal, setShowModal] = useState(false);
-
-  const openModal = () => {
-    setShowModal(true);
+  // Botão do MailerLite como HTML puro
+  const renderMailerLiteButton = (text: string) => {
+    return {
+      __html: `<button class="ml-onclick-form bg-primary mt-4 rounded-full text-background py-3 px-10 hover:bg-blue-700 transition-all text-lg font-medium" onclick="ml('show', 'RsmHEY', true)">${text}</button>`
+    };
   };
 
-  const closeModal = () => {
-    setShowModal(false);
+  // Botão do MailerLite como HTML puro (versão branca)
+  const renderWhiteMailerLiteButton = (text: string) => {
+    return {
+      __html: `<button class="ml-onclick-form bg-white text-primary font-bold py-3 px-10 rounded-full hover:bg-gray-100 transition-all text-lg" onclick="ml('show', 'RsmHEY', true)">${text}</button>`
+    };
   };
 
   return (
     <>
+      {/* O Script do Next.js pode não estar funcionando adequadamente para este caso específico,
+         então estamos carregando via useEffect */}
+      
       <Script id="schema-org" type="application/ld+json">
         {`
           {
@@ -119,13 +125,7 @@ export default function Home() {
               O Devocionei conecta você com sua comunidade através de devocionais compartilhados, 
               rankings de leitura e ferramentas para discipulado em grupo.
             </p>
-            <button
-              onClick={openModal}
-              className="bg-primary mt-4 rounded-full text-background py-3 px-10 hover:bg-blue-700 transition-all text-lg font-medium"
-              aria-label="Faça seu pré-cadastro no Devocionei"
-            >
-              Faça seu pré-cadastro
-            </button>
+            <div dangerouslySetInnerHTML={renderMailerLiteButton("Faça seu pré-cadastro")} />
           </section>
 
           {/* Video Demo Section */}
@@ -502,13 +502,7 @@ export default function Home() {
               </div>
             </div>
             <div className="text-center mt-8">
-              <button
-                onClick={openModal}
-                className="bg-primary mt-4 rounded-full text-background py-3 px-8 hover:bg-blue-700 transition-all text-lg font-medium"
-                aria-label="Faça seu pré-cadastro para participar do Devocionei"
-              >
-                Quero participar do Devocionei
-              </button>
+              <div dangerouslySetInnerHTML={renderMailerLiteButton("Quero participar do Devocionei")} />
             </div>
           </section>
 
@@ -582,13 +576,7 @@ export default function Home() {
             <p className="mb-8 max-w-2xl mx-auto text-lg">
               Seja um dos primeiros a acessar o Devocionei e transforme sua experiência devocional junto com sua comunidade.
             </p>
-            <button
-              onClick={openModal}
-              className="bg-white text-primary font-bold py-3 px-10 rounded-full hover:bg-gray-100 transition-all text-lg"
-              aria-label="Inscreva-se para receber novidades do Devocionei"
-            >
-              Fazer pré-cadastro
-            </button>
+            <div dangerouslySetInnerHTML={renderWhiteMailerLiteButton("Fazer pré-cadastro")} />
           </section>
         </main>
 
@@ -601,85 +589,6 @@ export default function Home() {
           <p className="pt-2">© {new Date().getFullYear()} Devocionei. Todos os direitos reservados.</p>
         </footer>
       </div>
-
-      {/* Pre-registration Modal */}
-      {showModal && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4">
-          <div className="bg-white dark:bg-gray-900 rounded-lg max-w-md w-full p-6 relative">
-            <button 
-              onClick={closeModal}
-              className="absolute top-4 right-4 text-gray-500 hover:text-gray-700"
-              aria-label="Fechar modal"
-            >
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-              </svg>
-            </button>
-            
-            <div className="text-center mb-6">
-              <h3 className="text-2xl font-bold mb-1">Pré-cadastro Devocionei</h3>
-              <p className="text-gray-600 dark:text-gray-400">Seja um dos primeiros a conhecer o aplicativo</p>
-            </div>
-            
-            <form className="space-y-4">
-              <div>
-                <label htmlFor="name" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Nome</label>
-                <input 
-                  type="text" 
-                  id="name" 
-                  className="w-full px-3 py-2 border border-gray-300 dark:border-gray-700 rounded-md focus:outline-none focus:ring-primary focus:border-primary"
-                  placeholder="Seu nome completo"
-                  required
-                />
-              </div>
-              
-              <div>
-                <label htmlFor="email" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Email</label>
-                <input 
-                  type="email" 
-                  id="email" 
-                  className="w-full px-3 py-2 border border-gray-300 dark:border-gray-700 rounded-md focus:outline-none focus:ring-primary focus:border-primary"
-                  placeholder="seu@email.com"
-                  required
-                />
-              </div>
-              
-              <div>
-                <label htmlFor="church" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Igreja (opcional)</label>
-                <input 
-                  type="text" 
-                  id="church" 
-                  className="w-full px-3 py-2 border border-gray-300 dark:border-gray-700 rounded-md focus:outline-none focus:ring-primary focus:border-primary"
-                  placeholder="Nome da sua igreja ou comunidade"
-                />
-              </div>
-              
-              <div className="flex items-start">
-                <input 
-                  type="checkbox" 
-                  id="newsletter" 
-                  className="h-4 w-4 text-primary focus:ring-primary border-gray-300 rounded mt-1"
-                  defaultChecked
-                />
-                <label htmlFor="newsletter" className="ml-2 block text-sm text-gray-600 dark:text-gray-400">
-                  Desejo receber novidades e atualizações sobre o Devocionei
-                </label>
-              </div>
-              
-              <button 
-                type="submit" 
-                className="w-full bg-primary text-white py-2 px-4 rounded-md hover:bg-blue-700 transition-all font-medium"
-              >
-                Enviar pré-cadastro
-              </button>
-            </form>
-            
-            <p className="text-xs text-gray-500 dark:text-gray-400 mt-4 text-center">
-              Ao se inscrever, você concorda em receber emails do Devocionei. Nós respeitamos sua privacidade e não compartilharemos seus dados.
-            </p>
-          </div>
-        </div>
-      )}
     </>
   );
 }
