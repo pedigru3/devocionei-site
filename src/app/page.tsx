@@ -3,8 +3,26 @@
 import Image from "next/image";
 import Logo from "@/images/devocionei.webp"
 import Script from "next/script";
+import { useState, useRef } from "react";
 
 export default function Home() {
+  // Estado para controlar o vídeo
+  const [isPlaying, setIsPlaying] = useState(false);
+  const videoRef = useRef<HTMLVideoElement>(null);
+  
+  // Função para lidar com o play/pause do vídeo
+  const toggleVideoPlay = () => {
+    if (!videoRef.current) return;
+    
+    if (isPlaying) {
+      videoRef.current.pause();
+    } else {
+      videoRef.current.play();
+    }
+    
+    setIsPlaying(!isPlaying);
+  };
+
   // Botão do MailerLite como HTML puro
   const renderMailerLiteButton = (text: string) => {
     return {
@@ -132,32 +150,32 @@ export default function Home() {
           <section className="mt-8 mb-16 w-full">
             <div className="relative w-full max-w-3xl mx-auto rounded-xl overflow-hidden shadow-xl">
               <div className="relative pb-[56.25%] h-0 bg-gray-100">
-                {/* Substitua este placeholder pelo iframe do seu vídeo real do YouTube/Vimeo */}
-                <div className="absolute inset-0 w-full h-full bg-gray-800 flex flex-col items-center justify-center p-8 text-center">
-                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-16 h-16 text-primary mb-4">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="m15.75 10.5 4.72-4.72a.75.75 0 0 1 1.28.53v11.38a.75.75 0 0 1-1.28.53l-4.72-4.72M4.5 18.75h9a2.25 2.25 0 0 0 2.25-2.25v-9a2.25 2.25 0 0 0-2.25-2.25h-9A2.25 2.25 0 0 0 2.25 7.5v9a2.25 2.25 0 0 0 2.25 2.25Z" />
-                  </svg>
-                  <h3 className="text-xl font-medium text-white mb-2">Veja o Devocionei em ação</h3>
-                  <p className="text-gray-300">Substitua este placeholder pelo iframe do vídeo demonstrativo do aplicativo</p>
-                  
-                  {/* 
-                  Exemplo de como ficaria com um iframe real:
-                  <iframe 
-                    className="absolute inset-0 w-full h-full" 
-                    src="https://www.youtube.com/embed/seu-video-id" 
-                    title="Vídeo demonstrativo do Devocionei"
-                    frameBorder="0" 
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                    allowFullScreen>
-                  </iframe> 
-                  */}
-                </div>
-              </div>
-              <div className="absolute inset-0 flex items-center justify-center">
-                <div className="w-20 h-20 bg-primary rounded-full flex items-center justify-center cursor-pointer hover:bg-blue-700 transition-all">
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-10 h-10 text-white ml-1">
-                    <path fillRule="evenodd" d="M4.5 5.653c0-1.427 1.529-2.33 2.779-1.643l11.54 6.347c1.295.712 1.295 2.573 0 3.286L7.28 19.99c-1.25.687-2.779-.217-2.779-1.643V5.653Z" clipRule="evenodd" />
-                  </svg>
+                <video
+                  className="absolute inset-0 w-full h-full" 
+                  src="/videos/devocionei-demo.mp4"
+                  poster="/videos/devocionei-poster.png"
+                  style={{ objectFit: 'cover' }}
+                  controls={false}
+                  playsInline
+                  ref={videoRef}
+                >
+                  <source src="/videos/devocionei-demo.mp4" type="video/mp4" />
+                  <source src="/videos/devocionei-demo.webm" type="video/webm" />
+                  Seu navegador não suporta o elemento de vídeo.
+                </video>
+                
+                {/* Botão de play personalizado */}
+                <div 
+                  className="absolute inset-0 flex items-center justify-center cursor-pointer"
+                  onClick={toggleVideoPlay}
+                >
+                  {!isPlaying && (
+                    <div className="w-20 h-20 bg-primary/80 rounded-full flex items-center justify-center hover:bg-primary transition-all">
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-10 h-10 text-white ml-1">
+                        <path fillRule="evenodd" d="M4.5 5.653c0-1.427 1.529-2.33 2.779-1.643l11.54 6.347c1.295.712 1.295 2.573 0 3.286L7.28 19.99c-1.25.687-2.779-.217-2.779-1.643V5.653Z" clipRule="evenodd" />
+                      </svg>
+                    </div>
+                  )}
                 </div>
               </div>
             </div>
