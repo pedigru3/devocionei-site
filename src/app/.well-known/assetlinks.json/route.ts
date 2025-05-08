@@ -1,0 +1,23 @@
+// app/.well-known/assetlinks/route.ts
+import { NextResponse } from 'next/server';
+
+export async function GET() {
+  const assetLinksContent = [
+    {
+      relation: ['delegate_permission/common.handle_all_urls'],
+      target: {
+        namespace: 'android_app',
+        package_name: 'com.sementedigital.devocioneiplus',
+        sha256_cert_fingerprints: [
+          '07:b9:2e:02:75:d5:e2:f3:b3:51:ef:6c:44:c5:a6:74:c3:6b:e6:f4:36:9f:01:e0:13:34:af:a3:7b:6d:6e:ef' 
+        ]
+      }
+    }
+  ];
+
+  return new NextResponse(JSON.stringify(assetLinksContent), {
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  });
+}
