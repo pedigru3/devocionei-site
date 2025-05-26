@@ -21,19 +21,19 @@ export default function JoinGroup({ params }: { params: { slug: string } }) {
     setIsIOS(ios);
 
     if (mobile) {
-      // Tenta abrir o app
-      window.location.href = urlScheme;
+    // Tenta abrir o app
+    window.location.href = urlScheme;
 
-      // Fallback após 2 segundos
-      const timer = setTimeout(() => {
+    // Fallback após 2 segundos
+    const timer = setTimeout(() => {
         if (android) {
-          window.location.href = "https://play.google.com/store/apps/details?id=com.sementedigital.devocioneiplus";
+        window.location.href = "https://play.google.com/store/apps/details?id=com.sementedigital.devocioneiplus";
         } else if (ios) {
-          window.location.href = "https://apps.apple.com/app/id6744262439"; 
-        }
-      }, 2000);
+        window.location.href = "https://apps.apple.com/app/id6744262439"; 
+      }
+    }, 2000);
 
-      return () => clearTimeout(timer);
+    return () => clearTimeout(timer);
     }
   }, [urlScheme]);
 
@@ -102,7 +102,7 @@ export default function JoinGroup({ params }: { params: { slug: string } }) {
             <p className="text-sm text-gray-600 mt-4">
               Após instalar o app, volte aqui e clique no link para entrar no grupo.
             </p>
-          </div>
+    </div>
         )}
       </article>
     </main>

@@ -272,50 +272,104 @@ export default function Home() {
             <div className="relative mt-12 mb-16">
               {/* Screenshots do aplicativo */}
               <div className="flex flex-col md:flex-row items-center justify-center gap-8 md:gap-12">
+                {/* iPhone 1 */}
                 <div className="relative scroll-animate stagger-1">
-                  <div className="absolute -inset-1.5 bg-gradient-to-r from-[#92A3FD]/30 to-[#9DCEFF]/30 rounded-2xl blur-lg"></div>
-                  <div className="relative bg-white dark:bg-gray-900 rounded-2xl p-1.5 shadow-xl hover:shadow-2xl transition-shadow duration-300">
-                    <div className="h-[500px] w-[230px] overflow-hidden rounded-xl border-8 border-gray-800 bg-gray-800 relative">
-                      <div className="absolute top-0 inset-x-0 h-6 bg-gray-800 z-10"></div>
-                      <Image 
-                        src="/screenShot1.PNG" 
-                        alt="Tela de feed de devocionais do aplicativo BibleRats" 
-                        width={214} 
-                        height={486}
-                        className="object-cover"
-                      />
+                  <div className="relative">
+                    {/* iPhone Frame */}
+                    <div className="relative bg-black rounded-[3rem] p-2 shadow-2xl">
+                      {/* Screen */}
+                      <div className="bg-white rounded-[2.5rem] overflow-hidden relative">
+                        {/* Dynamic Island */}
+                        <div className="absolute top-2 left-1/2 transform -translate-x-1/2 w-24 h-6 bg-black rounded-full z-20"></div>
+                        
+                        {/* Screen Content */}
+                        <div className="h-[500px] w-[230px] relative">
+                          <Image 
+                            src="/screenShot1.jpg" 
+                            alt="Tela de feed de devocionais do aplicativo BibleRats" 
+                            width={230} 
+                            height={500}
+                            className="object-cover w-full h-full"
+                          />
+                        </div>
+                        
+                        {/* Home Indicator */}
+                        <div className="absolute bottom-2 left-1/2 transform -translate-x-1/2 w-32 h-1 bg-black rounded-full opacity-60"></div>
+                      </div>
+                      
+                      {/* Side Buttons */}
+                      <div className="absolute left-0 top-20 w-1 h-8 bg-gray-700 rounded-l-lg"></div>
+                      <div className="absolute left-0 top-32 w-1 h-12 bg-gray-700 rounded-l-lg"></div>
+                      <div className="absolute left-0 top-48 w-1 h-12 bg-gray-700 rounded-l-lg"></div>
+                      <div className="absolute right-0 top-32 w-1 h-16 bg-gray-700 rounded-r-lg"></div>
                     </div>
                   </div>
                 </div>
                 
+                {/* iPhone 2 */}
                 <div className="relative mt-8 md:mt-16 scroll-animate stagger-2">
-                  <div className="absolute -inset-1.5 bg-gradient-to-r from-[#9DCEFF]/30 to-[#92A3FD]/30 rounded-2xl blur-lg"></div>
-                  <div className="relative bg-white dark:bg-gray-900 rounded-2xl p-1.5 shadow-xl hover:shadow-2xl transition-shadow duration-300">
-                    <div className="h-[500px] w-[230px] overflow-hidden rounded-xl border-8 border-gray-800 bg-gray-800 relative">
-                      <div className="absolute top-0 inset-x-0 h-6 bg-gray-800 z-10"></div>
-                      <Image 
-                        src="/screenShot2.PNG" 
-                        alt="Tela de plano de leitura do aplicativo BibleRats" 
-                        width={214} 
-                        height={486}
-                        className="object-cover"
-                      />
+                  <div className="relative">
+                    {/* iPhone Frame */}
+                    <div className="relative bg-black rounded-[3rem] p-2 shadow-2xl">
+                      {/* Screen */}
+                      <div className="bg-white rounded-[2.5rem] overflow-hidden relative">
+                        {/* Dynamic Island */}
+                        <div className="absolute top-2 left-1/2 transform -translate-x-1/2 w-24 h-6 bg-black rounded-full z-20"></div>
+                        
+                        {/* Screen Content */}
+                        <div className="h-[500px] w-[230px] relative">
+                          <Image 
+                            src="/screenShot2.jpg" 
+                            alt="Tela de plano de leitura do aplicativo BibleRats" 
+                            width={230} 
+                            height={500}
+                            className="object-cover w-full h-full"
+                          />
+                        </div>
+                        
+                        {/* Home Indicator */}
+                        <div className="absolute bottom-2 left-1/2 transform -translate-x-1/2 w-32 h-1 bg-black rounded-full opacity-60"></div>
+                      </div>
+                      
+                      {/* Side Buttons */}
+                      <div className="absolute left-0 top-20 w-1 h-8 bg-gray-700 rounded-l-lg"></div>
+                      <div className="absolute left-0 top-32 w-1 h-12 bg-gray-700 rounded-l-lg"></div>
+                      <div className="absolute left-0 top-48 w-1 h-12 bg-gray-700 rounded-l-lg"></div>
+                      <div className="absolute right-0 top-32 w-1 h-16 bg-gray-700 rounded-r-lg"></div>
                     </div>
                   </div>
                 </div>
                 
+                {/* iPhone 3 */}
                 <div className="relative mt-8 md:mt-28 scroll-animate stagger-3">
-                  <div className="absolute -inset-1.5 bg-gradient-to-r from-[#92A3FD]/30 to-indigo-600/30 rounded-2xl blur-lg"></div>
-                  <div className="relative bg-white dark:bg-gray-900 rounded-2xl p-1.5 shadow-xl hover:shadow-2xl transition-shadow duration-300">
-                    <div className="h-[500px] w-[230px] overflow-hidden rounded-xl border-8 border-gray-800 bg-gray-800 relative">
-                      <div className="absolute top-0 inset-x-0 h-6 bg-gray-800 z-10"></div>
-                      <Image 
-                        src="/screenShot13.PNG" 
-                        alt="Tela de ranking do grupo do aplicativo BibleRats" 
-                        width={214} 
-                        height={486}
-                        className="object-cover"
-                      />
+                  <div className="relative">
+                    {/* iPhone Frame */}
+                    <div className="relative bg-black rounded-[3rem] p-2 shadow-2xl">
+                      {/* Screen */}
+                      <div className="bg-white rounded-[2.5rem] overflow-hidden relative">
+                        {/* Dynamic Island */}
+                        <div className="absolute top-2 left-1/2 transform -translate-x-1/2 w-24 h-6 bg-black rounded-full z-20"></div>
+                        
+                        {/* Screen Content */}
+                        <div className="h-[500px] w-[230px] relative">
+                          <Image 
+                            src="/screenShot3.jpg" 
+                            alt="Tela de ranking do grupo do aplicativo BibleRats" 
+                            width={230} 
+                            height={500}
+                            className="object-cover w-full h-full"
+                          />
+                        </div>
+                        
+                        {/* Home Indicator */}
+                        <div className="absolute bottom-2 left-1/2 transform -translate-x-1/2 w-32 h-1 bg-black rounded-full opacity-60"></div>
+                      </div>
+                      
+                      {/* Side Buttons */}
+                      <div className="absolute left-0 top-20 w-1 h-8 bg-gray-700 rounded-l-lg"></div>
+                      <div className="absolute left-0 top-32 w-1 h-12 bg-gray-700 rounded-l-lg"></div>
+                      <div className="absolute left-0 top-48 w-1 h-12 bg-gray-700 rounded-l-lg"></div>
+                      <div className="absolute right-0 top-32 w-1 h-16 bg-gray-700 rounded-r-lg"></div>
                     </div>
                   </div>
                 </div>
