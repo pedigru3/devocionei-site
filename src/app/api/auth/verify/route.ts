@@ -26,6 +26,20 @@ export async function POST(request: Request) {
     });
   } catch (error) {
     console.error('Erro ao verificar token:', error);
+    
+    // Tratamento específico para erros de configuração do Firebase
+    if (error instanceof Error) {
+      if (error.message.includes('Para usar o Firebase Admin SDK')) {
+        return NextResponse.json(
+          { 
+            error: 'Erro de configuração do servidor',
+            details: 'Firebase Admin SDK não configurado corretamente'
+          },
+          { status: 500 }
+        );
+      }
+    }
+    
     return NextResponse.json(
       { error: 'Token inválido' },
       { status: 401 }

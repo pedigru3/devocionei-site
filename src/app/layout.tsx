@@ -14,23 +14,23 @@ const geistMono = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "Devocionei",
+  title: "BibleRats",
   description: "Conecte-se com sua comunidade através de devocionais compartilhados, rankings de leitura e ferramentas para discipulado em grupo.",
   keywords: ["devocional", "comunidade", "discipulado", "leitura bíblica", "estudos bíblicos", "igreja", "células", "aplicativo cristão"],
-  authors: [{ name: "Devocionei" }],
-  creator: "Devocionei",
-  publisher: "Devocionei",
+  authors: [{ name: "Felipe Ferreira" }],
+  creator: "BibleRats",
+  publisher: "BibleRats",
   openGraph: {
-    title: "Devocionei - Conectando comunidades através da Palavra",
+    title: "BibleRats - Conectando comunidades através da Palavra",
     description: "Compartilhe devocionais, participe de desafios e fortaleça sua comunidade com ferramentas de discipulado em grupo.",
-    url: "https://devocionei.com.br",
-    siteName: "Devocionei",
+    url: "https://biblerats.com",
+    siteName: "BibleRats",
     images: [
       {
         url: "/og-image.jpg",
         width: 1200,
         height: 630,
-        alt: "Devocionei - Seu guia de devocionais em comunidade",
+        alt: "BibleRats - Desafio devocional",
       },
     ],
     locale: "pt_BR",
@@ -38,7 +38,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Devocionei - Plataforma de Devocionais Comunitários",
+    title: "BibleRats - Desafio devocional",
     description: "Conecte-se com sua comunidade através de devocionais compartilhados e ferramentas para discipulado em grupo.",
     images: ["/twitter-image.jpg"],
   },
