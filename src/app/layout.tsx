@@ -15,19 +15,19 @@ const geistMono = localFont({
 
 export const metadata: Metadata = {
   title: "BibleRats",
-  description: "Conecte-se com sua comunidade através de devocionais compartilhados, rankings de leitura e ferramentas para discipulado em grupo.",
-  keywords: ["devocional", "comunidade", "discipulado", "leitura bíblica", "estudos bíblicos", "igreja", "células", "aplicativo cristão"],
+  description: "Desafie-se a ler a Bíblia diariamente e compartilhe com sua comunidade.",
+  keywords: ["devocional", "comunidade", "discipulado", "leitura bíblica", "estudos bíblicos", "igreja", "células", "aplicativo cristão", "bibleRats"],
   authors: [{ name: "Felipe Ferreira" }],
   creator: "BibleRats",
   publisher: "BibleRats",
   openGraph: {
-    title: "BibleRats - Conectando comunidades através da Palavra",
-    description: "Compartilhe devocionais, participe de desafios e fortaleça sua comunidade com ferramentas de discipulado em grupo.",
+    title: "BibleRats - Desafio devocional",
+    description: "Desafie-se a ler a Bíblia diariamente e compartilhe com sua comunidade.",
     url: "https://biblerats.com",
     siteName: "BibleRats",
     images: [
       {
-        url: "/og-image.jpg",
+        url: "/og=image.png",
         width: 1200,
         height: 630,
         alt: "BibleRats - Desafio devocional",
@@ -39,7 +39,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "BibleRats - Desafio devocional",
-    description: "Conecte-se com sua comunidade através de devocionais compartilhados e ferramentas para discipulado em grupo.",
+    description: "Desafie-se a ler a Bíblia diariamente e compartilhe com sua comunidade.",
     images: ["/twitter-image.jpg"],
   },
   alternates: {
