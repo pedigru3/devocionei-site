@@ -47,7 +47,7 @@ export default function Home() {
           {
             "@context": "https://schema.org",
             "@type": "WebApplication",
-            "name": "Devocionei",
+            "name": "BibleRats",
             "applicationCategory": "CommunicationApplication",
             "operatingSystem": "Cross-platform",
             "offers": {
@@ -55,7 +55,7 @@ export default function Home() {
               "price": "0",
               "priceCurrency": "BRL"
             },
-            "description": "O Devocionei conecta você com sua comunidade através de devocionais compartilhados, rankings de leitura e ferramentas para discipulado em grupo.",
+            "description": "O BibleRats conecta você com sua comunidade através de devocionais compartilhados, rankings de leitura e ferramentas para discipulado em grupo.",
             "url": "https://devocionei.com.br"
           }
         `}
@@ -69,18 +69,18 @@ export default function Home() {
             "mainEntity": [
               {
                 "@type": "Question",
-                "name": "O Devocionei é gratuito?",
+                "name": "O BibleRats é gratuito?",
                 "acceptedAnswer": {
                   "@type": "Answer",
-                  "text": "Sim! O Devocionei oferece um plano gratuito com todas as funcionalidades principais. Existem planos premium com recursos adicionais para igrejas e ministérios maiores."
+                  "text": "Sim! O BibleRats oferece um plano gratuito com todas as funcionalidades principais. Existem planos premium com recursos adicionais para igrejas e ministérios maiores."
                 }
               },
               {
                 "@type": "Question",
-                "name": "Preciso fazer parte de um grupo para usar o Devocionei?",
+                "name": "Preciso fazer parte de um grupo para usar o BibleRats?",
                 "acceptedAnswer": {
                   "@type": "Answer",
-                  "text": "Nós acreditamos que Deus nos chama a viver em comunidade. Embora você possa usar o Devocionei individualmente, a experiência é muito mais rica quando compartilhada com seu grupo, célula ou igreja."
+                  "text": "Nós acreditamos que Deus nos chama a viver em comunidade. Embora você possa usar o BibleRats individualmente, a experiência é muito mais rica quando compartilhada com seu grupo, célula ou igreja."
                 }
               },
               {
@@ -93,18 +93,18 @@ export default function Home() {
               },
               {
                 "@type": "Question",
-                "name": "Preciso ter uma Bíblia para usar o Devocionei?",
+                "name": "Preciso ter uma Bíblia para usar o BibleRats?",
                 "acceptedAnswer": {
                   "@type": "Answer",
-                  "text": "Sim, o Devocionei é uma ferramenta para acompanhar sua leitura bíblica e compartilhar devocionais. Atualmente, você precisará ter sua própria Bíblia, seja física ou digital, para fazer as leituras. A integração com textos bíblicos está em nossos planos futuros."
+                  "text": "Sim, o BibleRats é uma ferramenta para acompanhar sua leitura bíblica e compartilhar devocionais. Atualmente, você precisará ter sua própria Bíblia, seja física ou digital, para fazer as leituras. A integração com textos bíblicos está em nossos planos futuros."
                 }
               },
               {
                 "@type": "Question",
-                "name": "Posso usar o Devocionei offline?",
+                "name": "Posso usar o BibleRats offline?",
                 "acceptedAnswer": {
                   "@type": "Answer",
-                  "text": "Não, o Devocionei requer uma conexão com a internet para funcionar. Isso garante que você sempre tenha acesso aos devocionais mais recentes e possa interagir em tempo real com sua comunidade."
+                  "text": "Não, o BibleRats requer uma conexão com a internet para funcionar. Isso garante que você sempre tenha acesso aos devocionais mais recentes e possa interagir em tempo real com sua comunidade."
                 }
               },
               {
@@ -126,21 +126,21 @@ export default function Home() {
             <Image
               className="mb-4"
               src={Logo}
-              alt="Logo Devocionei"
+              alt="Logo BibleRats"
               width={120}
               height={120}
               priority
             />
           </div>
-          <h1 className="text-5xl font-bold mb-2">Devocionei</h1>
-          <p className="mt-2 text-xl md:text-2xl">Seu guia de devocionais em comunidade</p>
+          <h1 className="text-5xl font-bold mb-2">BibleRats</h1>
+          <p className="mt-2 text-xl md:text-2xl">Seu desafio devocional</p>
         </header>
         
         <main className="flex flex-col items-center w-full max-w-4xl">
           <section className="text-center mb-12 w-full">
-            <h2 className="sr-only">Sobre o Devocionei</h2>
+            <h2 className="sr-only">Sobre o BibleRats</h2>
             <p className="text-center text-lg md:text-xl mb-8 max-w-3xl mx-auto">
-              O Devocionei conecta você com sua comunidade através de devocionais compartilhados, 
+              O BibleRats conecta você com sua comunidade através de devocionais compartilhados, 
               rankings de leitura e ferramentas para discipulado em grupo.
             </p>
             <div dangerouslySetInnerHTML={renderMailerLiteButton("Faça seu pré-cadastro")} />
@@ -187,7 +187,7 @@ export default function Home() {
           {/* Benefícios Section */}
           <section className="mt-4 py-12 rounded-lg px-8 w-full">
             <h2 className="text-3xl font-semibold text-center mb-12">
-              Por que usar o Devocionei?
+              Por que usar o BibleRats?
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {/* Benefício 1 */}
@@ -264,7 +264,7 @@ export default function Home() {
           {/* App Screenshots Section */}
           <section className="mt-16 py-12 w-full">
             <h2 className="text-3xl font-semibold text-center mb-8">
-              Conheça o Devocionei
+              Conheça o BibleRats
             </h2>
             <div className="relative mt-12 mb-16">
               {/* Screenshots do aplicativo - substitua as URLs por imagens reais */}
@@ -277,7 +277,7 @@ export default function Home() {
                       {/* Feed de devocionais */}
                       <Image 
                         src="/screenShot1.PNG" 
-                        alt="Tela de feed de devocionais do aplicativo Devocionei" 
+                        alt="Tela de feed de devocionais do aplicativo BibleRats" 
                         width={214} 
                         height={486}
                         className="object-cover"
@@ -294,7 +294,7 @@ export default function Home() {
                       {/* Plano de Leitura */}
                       <Image 
                         src="/screenShot2.PNG" 
-                        alt="Tela de plano de leitura do aplicativo Devocionei" 
+                        alt="Tela de plano de leitura do aplicativo BibleRats" 
                         width={214} 
                         height={486}
                         className="object-cover"
@@ -311,7 +311,7 @@ export default function Home() {
                       {/* Ranking do grupo */}
                       <Image 
                         src="/screenShot13.PNG" 
-                        alt="Tela de ranking do grupo do aplicativo Devocionei" 
+                        alt="Tela de ranking do grupo do aplicativo BibleRats" 
                         width={214} 
                         height={486}
                         className="object-cover"
@@ -323,7 +323,7 @@ export default function Home() {
             </div>
             
             <div className="mt-20">
-              <h3 className="text-2xl font-semibold text-center mb-12">Como o Devocionei vai transformar sua vida espiritual</h3>
+              <h3 className="text-2xl font-semibold text-center mb-12">Como o BibleRats vai transformar sua vida espiritual</h3>
               
               <div className="grid grid-cols-1 md:grid-cols-2 gap-10 max-w-5xl mx-auto">
                 <div className="bg-white dark:bg-gray-900 p-6 rounded-lg shadow-md">
@@ -520,7 +520,7 @@ export default function Home() {
               </div>
             </div>
             <div className="text-center mt-8">
-              <div dangerouslySetInnerHTML={renderMailerLiteButton("Quero participar do Devocionei")} />
+              <div dangerouslySetInnerHTML={renderMailerLiteButton("Quero participar do BibleRats")} />
             </div>
           </section>
 
@@ -555,13 +555,13 @@ export default function Home() {
             </h2>
             <div className="max-w-3xl mx-auto space-y-6">
               <div className="bg-white dark:bg-gray-900 p-6 rounded-lg shadow-sm">
-                <h3 className="text-xl font-medium mb-3">O Devocionei é gratuito?</h3>
-                <p>Sim! O Devocionei oferece um plano gratuito com todas as funcionalidades principais. Existem planos premium com recursos adicionais para igrejas e ministérios maiores.</p>
+                <h3 className="text-xl font-medium mb-3">O BibleRats é gratuito?</h3>
+                <p>Sim! O BibleRats oferece um plano gratuito com todas as funcionalidades principais. Existem planos premium com recursos adicionais para igrejas e ministérios maiores.</p>
               </div>
               
               <div className="bg-white dark:bg-gray-900 p-6 rounded-lg shadow-sm">
-                <h3 className="text-xl font-medium mb-3">Preciso fazer parte de um grupo para usar o Devocionei?</h3>
-                <p>Nós acreditamos que Deus nos chama a viver em comunidade. Embora você possa usar o Devocionei individualmente, a experiência é muito mais rica quando compartilhada com seu grupo, célula ou igreja.</p>
+                <h3 className="text-xl font-medium mb-3">Preciso fazer parte de um grupo para usar o BibleRats?</h3>
+                <p>Nós acreditamos que Deus nos chama a viver em comunidade. Embora você possa usar o BibleRats individualmente, a experiência é muito mais rica quando compartilhada com seu grupo, célula ou igreja.</p>
               </div>
               
               <div className="bg-white dark:bg-gray-900 p-6 rounded-lg shadow-sm">
@@ -570,13 +570,13 @@ export default function Home() {
               </div>
               
               <div className="bg-white dark:bg-gray-900 p-6 rounded-lg shadow-sm">
-                <h3 className="text-xl font-medium mb-3">Preciso ter uma Bíblia para usar o Devocionei?</h3>
-                <p>Sim, o Devocionei é uma ferramenta para acompanhar sua leitura bíblica e compartilhar devocionais. Atualmente, você precisará ter sua própria Bíblia, seja física ou digital, para fazer as leituras. A integração com textos bíblicos está em nossos planos futuros.</p>
+                <h3 className="text-xl font-medium mb-3">Preciso ter uma Bíblia para usar o BibleRats?</h3>
+                <p>Sim, o BibleRats é uma ferramenta para acompanhar sua leitura bíblica e compartilhar devocionais. Atualmente, você precisará ter sua própria Bíblia, seja física ou digital, para fazer as leituras. A integração com textos bíblicos está em nossos planos futuros.</p>
               </div>
               
               <div className="bg-white dark:bg-gray-900 p-6 rounded-lg shadow-sm">
-                <h3 className="text-xl font-medium mb-3">Posso usar o Devocionei offline?</h3>
-                <p>Não, o Devocionei requer uma conexão com a internet para funcionar. Isso garante que você sempre tenha acesso aos devocionais mais recentes e possa interagir em tempo real com sua comunidade.</p>
+                <h3 className="text-xl font-medium mb-3">Posso usar o BibleRats offline?</h3>
+                <p>Não, o BibleRats requer uma conexão com a internet para funcionar. Isso garante que você sempre tenha acesso aos devocionais mais recentes e possa interagir em tempo real com sua comunidade.</p>
               </div>
               
               <div className="bg-white dark:bg-gray-900 p-6 rounded-lg shadow-sm">
@@ -592,7 +592,7 @@ export default function Home() {
               Transforme sua experiência devocional hoje
             </h2>
             <p className="mb-8 max-w-2xl mx-auto text-lg">
-              Seja um dos primeiros a acessar o Devocionei e transforme sua experiência devocional junto com sua comunidade.
+              Seja um dos primeiros a acessar o BibleRats e transforme sua experiência devocional junto com sua comunidade.
             </p>
             <div dangerouslySetInnerHTML={renderWhiteMailerLiteButton("Fazer pré-cadastro")} />
           </section>
@@ -604,7 +604,7 @@ export default function Home() {
             <a href="/terms" className="hover:underline">Termos de Uso</a>
             <a href="/contact" className="hover:underline">Contato</a>
           </div>
-          <p className="pt-2">© {new Date().getFullYear()} Devocionei. Todos os direitos reservados.</p>
+          <p className="pt-2">© {new Date().getFullYear()} BibleRats. Todos os direitos reservados.</p>
         </footer>
       </div>
     </>
