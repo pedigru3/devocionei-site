@@ -2,25 +2,9 @@
 
 import Image from "next/image";
 import Script from "next/script";
-import { useState, useRef, useEffect } from "react";
+import { useEffect } from "react";
 
 export default function Home() {
-  // Estado para controlar o vídeo
-  const [isPlaying, setIsPlaying] = useState(false);
-  const videoRef = useRef<HTMLVideoElement>(null);
-  
-  // Função para lidar com o play/pause do vídeo
-  const toggleVideoPlay = () => {
-    if (!videoRef.current) return;
-    
-    if (isPlaying) {
-      videoRef.current.pause();
-    } else {
-      videoRef.current.play();
-    }
-    
-    setIsPlaying(!isPlaying);
-  };
 
   // Hook para animações de scroll
   useEffect(() => {
@@ -186,41 +170,20 @@ export default function Home() {
             <div dangerouslySetInnerHTML={renderMailerLiteButton("Faça seu pré-cadastro")} />
           </section>
 
-          {/* Video Demo Section */}
+          {/* Image Demo Section */}
           <section className="mt-8 mb-16 w-full scroll-animate stagger-2">
             <div className="relative w-full max-w-3xl mx-auto rounded-xl overflow-hidden shadow-xl hover:shadow-2xl transition-shadow duration-300">
-              <div className="relative pb-[56.25%] h-0 bg-gray-100">
-                <video
-                  className="absolute inset-0 w-full h-full" 
-                  src="/videos/devocionei-demo.mp4"
-                  poster="/videos/devocionei-poster.png"
-                  style={{ objectFit: 'cover' }}
-                  controls={false}
-                  playsInline
-                  ref={videoRef}
-                >
-                  <source src="/videos/devocionei-demo.mp4" type="video/mp4" />
-                  <source src="/videos/devocionei-demo.webm" type="video/webm" />
-                  Seu navegador não suporta o elemento de vídeo.
-                </video>
-                
-                {/* Botão de play personalizado */}
-                <div 
-                  className="absolute inset-0 flex items-center justify-center cursor-pointer"
-                  onClick={toggleVideoPlay}
-                >
-                  {!isPlaying && (
-                    <div className="w-20 h-20 bg-gradient-primary rounded-full flex items-center justify-center hover:scale-110 transition-transform duration-300 shadow-lg">
-                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-10 h-10 text-white ml-1">
-                        <path fillRule="evenodd" d="M4.5 5.653c0-1.427 1.529-2.33 2.779-1.643l11.54 6.347c1.295.712 1.295 2.573 0 3.286L7.28 19.99c-1.25.687-2.779-.217-2.779-1.643V5.653Z" clipRule="evenodd" />
-                      </svg>
-                    </div>
-                  )}
-                </div>
-              </div>
+              <Image
+                src="/Capa.png"
+                alt="BibleRats - Conectando comunidades através da Palavra"
+                width={1200}
+                height={675}
+                className="w-full h-auto object-cover"
+                priority
+              />
             </div>
             <div className="text-center mt-4 text-sm text-gray-500">
-              Veja como é fácil compartilhar devocionais e acompanhar o progresso do seu grupo
+              Conecte-se com sua comunidade através de devocionais compartilhados
             </div>
           </section>
 
