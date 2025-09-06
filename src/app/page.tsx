@@ -1,118 +1,666 @@
+"use client"
+
 import Image from "next/image";
-import Logo from "@/images/devocionei.png"
+import Script from "next/script";
+import { useEffect } from "react";
 
 export default function Home() {
 
+  // Hook para animações de scroll
+  useEffect(() => {
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('animate-fade-in-up');
+        }
+      });
+    }, observerOptions);
+
+    // Observar todos os elementos com a classe 'scroll-animate'
+    const animateElements = document.querySelectorAll('.scroll-animate');
+    animateElements.forEach((el) => observer.observe(el));
+
+    return () => observer.disconnect();
+  }, []);
+
+  // Botão do MailerLite como HTML puro
+  const renderMailerLiteButton = (text: string) => {
+    return {
+      __html: `<button class="ml-onclick-form bg-gradient-primary hover-gradient text-white mt-4 rounded-full py-3 px-10 transition-all text-lg font-medium hover:scale-105 hover:shadow-lg" onclick="ml('show', 'RsmHEY', true)">${text}</button>`
+    };
+  };
+
+  // Botão do MailerLite como HTML puro (versão branca)
+  const renderWhiteMailerLiteButton = (text: string) => {
+    return {
+      __html: `<button class="ml-onclick-form bg-white text-[#92A3FD] font-bold py-3 px-10 rounded-full hover:bg-gray-100 transition-all text-lg hover:scale-105 hover:shadow-lg" onclick="ml('show', 'RsmHEY', true)">${text}</button>`
+    };
+  };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen p-8">
-      <header className="text-center mb-4">
-        <div className="flex justify-center">
+    <>
+      {/* Estilos para animações */}
+      <style jsx global>{`
+        .scroll-animate {
+          opacity: 0;
+          transform: translateY(30px);
+          transition: all 0.6s ease-out;
+        }
+        
+        .animate-fade-in-up {
+          opacity: 1;
+          transform: translateY(0);
+        }
+        
+        .stagger-1 { transition-delay: 0.1s; }
+        .stagger-2 { transition-delay: 0.2s; }
+        .stagger-3 { transition-delay: 0.3s; }
+        .stagger-4 { transition-delay: 0.4s; }
+        .stagger-5 { transition-delay: 0.5s; }
+        .stagger-6 { transition-delay: 0.6s; }
+      `}</style>
 
-        </div>
-        <h1 className="text-4xl font-bold">Devocionei</h1>
-        <p className="mt-2 text-lg">Seu devocional personalizado para meditar nas escrituras.</p>
-      </header>
+      {/* Schema.org Scripts */}
+      <Script id="schema-org" type="application/ld+json">
+        {`
+          {
+            "@context": "https://schema.org",
+            "@type": "WebApplication",
+            "name": "BibleRats",
+            "applicationCategory": "CommunicationApplication",
+            "operatingSystem": "Cross-platform",
+            "offers": {
+              "@type": "Offer",
+              "price": "0",
+              "priceCurrency": "BRL"
+            },
+            "description": "O BibleRats conecta você com sua comunidade através de devocionais compartilhados, rankings de leitura e ferramentas para discipulado em grupo.",
+            "url": "https://devocionei.com.br"
+          }
+        `}
+      </Script>
       
-      <main className="flex flex-col items-center">
-        <Image
-            className="mb-8"
-            src={Logo}
-            alt="Logo Devocionei"
-            width={250}
-            height={250}
-          />
-        <p className="text-center mb-6">
-          Com o Devocionei, você pode inserir seu versículo e receber perguntas que ajudam na reflexão e aprendizado.
-        </p>
-        <button
-          className="bg-primary mt-4 rounded-full text-background py-2 px-8 hover:bg-blue-700 transition"
-        >
-          Baixe agora
-        </button>
-      </main>
+      <Script id="faq-schema" type="application/ld+json">
+        {`
+          {
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "mainEntity": [
+              {
+                "@type": "Question",
+                "name": "O BibleRats é gratuito?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Sim! O BibleRats oferece um plano gratuito com todas as funcionalidades principais. Existem planos premium com recursos adicionais para igrejas e ministérios maiores."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Preciso fazer parte de um grupo para usar o BibleRats?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Nós acreditamos que Deus nos chama a viver em comunidade. Embora você possa usar o BibleRats individualmente, a experiência é muito mais rica quando compartilhada com seu grupo, célula ou igreja."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Quantas pessoas posso adicionar ao meu grupo?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "No plano gratuito, você pode adicionar até 15 pessoas em um grupo. Para grupos maiores, recomendamos os planos premium que oferecem capacidade ilimitada."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Preciso ter uma Bíblia para usar o BibleRats?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Sim, o BibleRats é uma ferramenta para acompanhar sua leitura bíblica e compartilhar devocionais. Atualmente, você precisará ter sua própria Bíblia, seja física ou digital, para fazer as leituras. A integração com textos bíblicos está em nossos planos futuros."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Posso usar o BibleRats offline?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Não, o BibleRats requer uma conexão com a internet para funcionar. Isso garante que você sempre tenha acesso aos devocionais mais recentes e possa interagir em tempo real com sua comunidade."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Como faço para criar um plano de leitura personalizado?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Na área de administrador do grupo, selecione &ldquo;Novo Plano&rdquo;, escolha um Livro ou Tema bíblico, defina o período e escreva uma descrição para o plano. É simples e rápido!"
+                }
+              }
+            ]
+          }
+        `}
+      </Script>
 
-      {/* Benefícios Section */}
-      <section className="mt-4 py-12 rounded-lg px-8">
-        <h2 className="text-3xl font-semibold text-center mb-12">
-          Por que usar o Devocionei?
-        </h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {/* Benefício 1 */}
-          <div className="flex flex-col items-center">
-            <svg 
-              xmlns="http://www.w3.org/2000/svg" 
-              fill="none" 
-              viewBox="0 0 24 24" 
-              stroke-width="1.5" 
-              stroke="currentColor" 
-              className="w-12 h-12 text-primary"
-            >
-              {/* Ícone representando o benefício 1 */}
-              <path 
-                stroke-linecap="round" 
-                stroke-linejoin="round" 
-                d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A48.117 48.117 0 0012 20.5c1.052 0 2.062-.18 3-.512V6.042z" 
-              />
-            </svg>
-            <h3 className="text-xl font-medium mt-4">Reflexão Profunda</h3>
-            <p className="text-center mt-2">
-              Perguntas cuidadosamente elaboradas para te guiar em uma meditação mais profunda.
-            </p>
+      <div className="flex flex-col items-center justify-center min-h-screen p-8">
+        <header className="text-center mb-6 w-full max-w-4xl scroll-animate">
+          <div className="flex justify-center">
+            <Image
+              className="mb-4 transition-transform duration-300 hover:scale-105"
+              src="/bibleRats.png"
+              alt="Logo BibleRats"
+              width={150}
+              height={150}
+              priority
+            />
           </div>
-
-          {/* Benefício 2 */}
-          <div className="flex flex-col items-center">
-            <svg 
-              xmlns="http://www.w3.org/2000/svg" 
-              fill="none" 
-              viewBox="0 0 24 24" 
-              stroke-width="1.5" 
-              stroke="currentColor" 
-              className="w-12 h-12 text-primary"
-            >
-              {/* Ícone representando o benefício 2 */}
-              <path 
-                stroke-linecap="round" 
-                stroke-linejoin="round" 
-                d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125m-1.687 1.688l-1.687 1.688" 
-              />
-            </svg>
-            <h3 className="text-xl font-medium mt-4">Personalizado</h3>
-            <p className="text-center mt-2">
-              Insira seus próprios versículos e personalize sua experiência devocional.
+          <h1 className="text-5xl font-bold mb-2">BibleRats</h1>
+          <p className="mt-2 text-xl md:text-2xl">Seu desafio devocional</p>
+        </header>
+        
+        <main className="flex flex-col items-center w-full max-w-4xl">
+          <section className="text-center mb-12 w-full scroll-animate stagger-1">
+            <h2 className="sr-only">Sobre o BibleRats</h2>
+            <p className="text-center text-lg md:text-xl mb-8 max-w-3xl mx-auto">
+              O BibleRats conecta você com sua comunidade através de devocionais compartilhados, 
+              rankings de leitura e ferramentas para discipulado em grupo.
             </p>
-          </div>
+            <div dangerouslySetInnerHTML={renderMailerLiteButton("Faça seu pré-cadastro")} />
+          </section>
 
-          {/* Benefício 3 */}
-          <div className="flex flex-col items-center">
-            <svg 
-              xmlns="http://www.w3.org/2000/svg" 
-              fill="none" 
-              viewBox="0 0 24 24" 
-              stroke-width="1.5" 
-              stroke="currentColor" 
-              className="w-12 h-12 text-primary"
-            >
-              {/* Ícone representando o benefício 3 */}
-              <path 
-                stroke-linecap="round" 
-                stroke-linejoin="round" 
-                d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" 
+          {/* Image Demo Section */}
+          <section className="mt-8 mb-16 w-full scroll-animate stagger-2">
+            <div className="relative w-full max-w-3xl mx-auto rounded-xl overflow-hidden shadow-xl hover:shadow-2xl transition-shadow duration-300">
+              <Image
+                src="/Capa.png"
+                alt="BibleRats - Conectando comunidades através da Palavra"
+                width={1200}
+                height={675}
+                className="w-full h-auto object-cover"
+                priority
               />
-            </svg>
-            <h3 className="text-xl font-medium mt-4">Fácil de Usar</h3>
-            <p className="text-center mt-2">
-              Interface simples e intuitiva para uma experiência devocional tranquila.
-            </p>
-          </div>
-        </div>
-      </section>
+            </div>
+            <div className="text-center mt-4 text-sm text-gray-500">
+              Conecte-se com sua comunidade através de devocionais compartilhados
+            </div>
+          </section>
 
-      <footer className="mt-12 text-center">
-        <a href="/privacy">Política de Privacidade</a>
-        <p className="pt-2">© 2023 Devocionei. Todos os direitos reservados.</p>
-      </footer>
-    </div>
+          {/* Benefícios Section */}
+          <section className="mt-4 py-12 rounded-lg px-8 w-full scroll-animate stagger-3">
+            <h2 className="text-3xl font-semibold text-center mb-12 text-gradient">
+              Por que usar o BibleRats?
+            </h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {/* Benefício 1 */}
+              <div className="flex flex-col items-center bg-white dark:bg-gray-900 p-6 rounded-lg shadow-sm hover:shadow-md transition-all duration-300 hover:-translate-y-1 scroll-animate stagger-4">
+                <svg 
+                  xmlns="http://www.w3.org/2000/svg" 
+                  fill="none" 
+                  viewBox="0 0 24 24" 
+                  strokeWidth="1.5" 
+                  stroke="currentColor" 
+                  className="w-12 h-12 text-[#92A3FD]"
+                  aria-hidden="true"
+                >
+                  <path 
+                    strokeLinecap="round" 
+                    strokeLinejoin="round" 
+                    d="M18 18.72a9.094 9.094 0 003.741-.479 3 3 0 00-4.682-2.72m.94 3.198l.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0112 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 016 18.719m12 0a5.971 5.971 0 00-.941-3.197m0 0A5.995 5.995 0 0012 12.75a5.995 5.995 0 00-5.058 2.772m0 0a3 3 0 00-4.681 2.72 8.986 8.986 0 003.74.477m.94-3.197a5.971 5.971 0 00-.94 3.197M15 6.75a3 3 0 11-6 0 3 3 0 016 0zm6 3a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0zm-13.5 0a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0z" 
+                  />
+                </svg>
+                <h3 className="text-xl font-medium mt-4 text-[#92A3FD]">Devocionais em Grupo</h3>
+                <p className="text-center mt-2">
+                  Compartilhe reflexões e insights com sua comunidade, fortalecendo laços de fé e amizade.
+                </p>
+              </div>
+
+              {/* Benefício 2 */}
+              <div className="flex flex-col items-center bg-white dark:bg-gray-900 p-6 rounded-lg shadow-sm hover:shadow-md transition-all duration-300 hover:-translate-y-1 scroll-animate stagger-5">
+                <svg 
+                  xmlns="http://www.w3.org/2000/svg" 
+                  fill="none" 
+                  viewBox="0 0 24 24" 
+                  strokeWidth="1.5" 
+                  stroke="currentColor" 
+                  className="w-12 h-12 text-[#92A3FD]"
+                  aria-hidden="true"
+                >
+                  <path 
+                    strokeLinecap="round" 
+                    strokeLinejoin="round" 
+                    d="M16.5 18.75h-9m9 0a3 3 0 013 3h-15a3 3 0 013-3m9 0v-3.375c0-.621-.503-1.125-1.125-1.125h-.871M7.5 18.75v-3.375c0-.621.504-1.125 1.125-1.125h.872m5.007 0H9.497m5.007 0a7.454 7.454 0 01-.982-3.172M9.497 14.25a7.454 7.454 0 00.981-3.172M5.25 4.236c-.982.143-1.954.317-2.916.52A6.003 6.003 0 007.73 9.728M5.25 4.236V4.5c0 2.108.966 3.99 2.48 5.228M5.25 4.236V2.721C7.456 2.41 9.71 2.25 12 2.25c2.291 0 4.545.16 6.75.47v1.516M7.73 9.728a6.726 6.726 0 002.748 1.35m8.272-6.842V4.5c0 2.108-.966 3.99-2.48 5.228m2.48-5.492a46.32 46.32 0 012.916.52 6.003 6.003 0 01-5.395 4.972m0 0a6.726 6.726 0 01-2.749 1.35m0 0a6.772 6.772 0 01-3.044 0" 
+                  />
+                </svg>
+                <h3 className="text-xl font-medium mt-4 text-[#92A3FD]">Rankings e Desafios</h3>
+                <p className="text-center mt-2">
+                  Acompanhe seu progresso e participe de desafios motivadores para manter uma rotina consistente de leitura.
+                </p>
+              </div>
+
+              {/* Benefício 3 */}
+              <div className="flex flex-col items-center bg-white dark:bg-gray-900 p-6 rounded-lg shadow-sm hover:shadow-md transition-all duration-300 hover:-translate-y-1 scroll-animate stagger-6">
+                <svg 
+                  xmlns="http://www.w3.org/2000/svg" 
+                  fill="none" 
+                  viewBox="0 0 24 24" 
+                  strokeWidth="1.5" 
+                  stroke="currentColor" 
+                  className="w-12 h-12 text-[#92A3FD]"
+                  aria-hidden="true"
+                >
+                  <path 
+                    strokeLinecap="round" 
+                    strokeLinejoin="round" 
+                    d="M8.25 3v1.5M4.5 8.25H3m18 0h-1.5M4.5 12H3m18 0h-1.5m-15 3.75H3m18 0h-1.5M8.25 19.5V21M12 3v1.5m0 15V21m3.75-18v1.5m0 15V21m-9-1.5h10.5a2.25 2.25 0 002.25-2.25V6.75a2.25 2.25 0 00-2.25-2.25H6.75A2.25 2.25 0 004.5 6.75v10.5a2.25 2.25 0 002.25 2.25zm.75-12h9v9h-9v-9z" 
+                  />
+                </svg>
+                <h3 className="text-xl font-medium mt-4 text-center text-[#92A3FD]">Ferramentas de Discipulado</h3>
+                <p className="text-center mt-2">
+                  Recursos específicos para líderes guiarem seus grupos em estudos bíblicos e crescimento espiritual conjunto.
+                </p>
+              </div>
+            </div>
+          </section>
+
+          {/* App Screenshots Section */}
+          <section className="mt-16 py-12 w-full scroll-animate">
+            <h2 className="text-3xl font-semibold text-center mb-8">
+              Conheça o BibleRats
+            </h2>
+            <div className="relative mt-12 mb-16">
+              {/* Screenshots do aplicativo */}
+              <div className="flex flex-col md:flex-row items-center justify-center gap-8 md:gap-12">
+                {/* iPhone 1 */}
+                <div className="relative scroll-animate stagger-1">
+                  <div className="relative">
+                    {/* iPhone Frame */}
+                    <div className="relative bg-black rounded-[3rem] p-2 shadow-2xl">
+                      {/* Screen */}
+                      <div className="bg-white rounded-[2.5rem] overflow-hidden relative">
+                        {/* Dynamic Island */}
+                        <div className="absolute top-2 left-1/2 transform -translate-x-1/2 w-24 h-6 bg-black rounded-full z-20"></div>
+                        
+                        {/* Screen Content */}
+                        <div className="h-[500px] w-[230px] relative">
+                          <Image 
+                            src="/screenShot1.jpg" 
+                            alt="Tela de feed de devocionais do aplicativo BibleRats" 
+                            width={230} 
+                            height={500}
+                            className="object-cover w-full h-full"
+                          />
+                        </div>
+                        
+                        {/* Home Indicator */}
+                        <div className="absolute bottom-2 left-1/2 transform -translate-x-1/2 w-32 h-1 bg-black rounded-full opacity-60"></div>
+                      </div>
+                      
+                      {/* Side Buttons */}
+                      <div className="absolute left-0 top-20 w-1 h-8 bg-gray-700 rounded-l-lg"></div>
+                      <div className="absolute left-0 top-32 w-1 h-12 bg-gray-700 rounded-l-lg"></div>
+                      <div className="absolute left-0 top-48 w-1 h-12 bg-gray-700 rounded-l-lg"></div>
+                      <div className="absolute right-0 top-32 w-1 h-16 bg-gray-700 rounded-r-lg"></div>
+                    </div>
+                  </div>
+                </div>
+                
+                {/* iPhone 2 */}
+                <div className="relative mt-8 md:mt-16 scroll-animate stagger-2">
+                  <div className="relative">
+                    {/* iPhone Frame */}
+                    <div className="relative bg-black rounded-[3rem] p-2 shadow-2xl">
+                      {/* Screen */}
+                      <div className="bg-white rounded-[2.5rem] overflow-hidden relative">
+                        {/* Dynamic Island */}
+                        <div className="absolute top-2 left-1/2 transform -translate-x-1/2 w-24 h-6 bg-black rounded-full z-20"></div>
+                        
+                        {/* Screen Content */}
+                        <div className="h-[500px] w-[230px] relative">
+                          <Image 
+                            src="/screenShot2.jpg" 
+                            alt="Tela de plano de leitura do aplicativo BibleRats" 
+                            width={230} 
+                            height={500}
+                            className="object-cover w-full h-full"
+                          />
+                        </div>
+                        
+                        {/* Home Indicator */}
+                        <div className="absolute bottom-2 left-1/2 transform -translate-x-1/2 w-32 h-1 bg-black rounded-full opacity-60"></div>
+                      </div>
+                      
+                      {/* Side Buttons */}
+                      <div className="absolute left-0 top-20 w-1 h-8 bg-gray-700 rounded-l-lg"></div>
+                      <div className="absolute left-0 top-32 w-1 h-12 bg-gray-700 rounded-l-lg"></div>
+                      <div className="absolute left-0 top-48 w-1 h-12 bg-gray-700 rounded-l-lg"></div>
+                      <div className="absolute right-0 top-32 w-1 h-16 bg-gray-700 rounded-r-lg"></div>
+                    </div>
+                  </div>
+                </div>
+                
+                {/* iPhone 3 */}
+                <div className="relative mt-8 md:mt-28 scroll-animate stagger-3">
+                  <div className="relative">
+                    {/* iPhone Frame */}
+                    <div className="relative bg-black rounded-[3rem] p-2 shadow-2xl">
+                      {/* Screen */}
+                      <div className="bg-white rounded-[2.5rem] overflow-hidden relative">
+                        {/* Dynamic Island */}
+                        <div className="absolute top-2 left-1/2 transform -translate-x-1/2 w-24 h-6 bg-black rounded-full z-20"></div>
+                        
+                        {/* Screen Content */}
+                        <div className="h-[500px] w-[230px] relative">
+                          <Image 
+                            src="/screenShot3.jpg" 
+                            alt="Tela de ranking do grupo do aplicativo BibleRats" 
+                            width={230} 
+                            height={500}
+                            className="object-cover w-full h-full"
+                          />
+                        </div>
+                        
+                        {/* Home Indicator */}
+                        <div className="absolute bottom-2 left-1/2 transform -translate-x-1/2 w-32 h-1 bg-black rounded-full opacity-60"></div>
+                      </div>
+                      
+                      {/* Side Buttons */}
+                      <div className="absolute left-0 top-20 w-1 h-8 bg-gray-700 rounded-l-lg"></div>
+                      <div className="absolute left-0 top-32 w-1 h-12 bg-gray-700 rounded-l-lg"></div>
+                      <div className="absolute left-0 top-48 w-1 h-12 bg-gray-700 rounded-l-lg"></div>
+                      <div className="absolute right-0 top-32 w-1 h-16 bg-gray-700 rounded-r-lg"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div className="mt-20 scroll-animate">
+              <h3 className="text-2xl font-semibold text-center mb-12">Como o BibleRats vai transformar sua vida espiritual</h3>
+              
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-10 max-w-5xl mx-auto">
+                <div className="bg-white dark:bg-gray-900 p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 scroll-animate stagger-1">
+                  <div className="flex items-center mb-4">
+                    <div className="p-3 bg-blue-100 dark:bg-blue-900 rounded-full mr-4">
+                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6 text-[#92A3FD]">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M12 6.042A8.967 8.967 0 0 0 6 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 0 1 6 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 0 1 6-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0 0 18 18a8.967 8.967 0 0 0-6 2.292m0-14.25v14.25" />
+                      </svg>
+                    </div>
+                    <h4 className="text-xl font-medium">Para Líderes de Células</h4>
+                  </div>
+                  <p className="mb-4">
+                    Crie planos de leitura personalizados para seu grupo, acompanhe em tempo real quem está participando e engaje sua célula em discussões profundas sobre a Palavra.
+                  </p>
+                  <ul className="space-y-2 mt-4">
+                    <li className="flex items-start">
+                      <svg className="h-5 w-5 text-[#92A3FD] mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                        <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd"></path>
+                      </svg>
+                      <span>Monitore o engajamento de cada participante</span>
+                    </li>
+                    <li className="flex items-start">
+                      <svg className="h-5 w-5 text-[#92A3FD] mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                        <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd"></path>
+                      </svg>
+                      <span>Envie lembretes e mensagens de encorajamento</span>
+                    </li>
+                    <li className="flex items-start">
+                      <svg className="h-5 w-5 text-[#92A3FD] mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                        <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd"></path>
+                      </svg>
+                      <span>Prepare discussões baseadas nas leituras da semana</span>
+                    </li>
+                  </ul>
+                </div>
+                
+                <div className="bg-white dark:bg-gray-900 p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 scroll-animate stagger-2">
+                  <div className="flex items-center mb-4">
+                    <div className="p-3 bg-green-100 dark:bg-green-900 rounded-full mr-4">
+                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6 text-green-600 dark:text-green-400">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M18 18.72a9.094 9.094 0 0 0 3.741-.479 3 3 0 0 0-4.682-2.72m.94 3.198.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0 1 12 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 0 1 6 18.719m12 0a5.971 5.971 0 0 0-.941-3.197m0 0A5.995 5.995 0 0 0 12 12.75a5.995 5.995 0 0 0-5.058 2.772m0 0a3 3 0 0 0-4.681 2.72 8.986 8.986 0 0 0 3.74.477m.94-3.197a5.971 5.971 0 0 0-.94 3.197M15 6.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Zm6 3a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Zm-13.5 0a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Z" />
+                      </svg>
+                    </div>
+                    <h4 className="text-xl font-medium">Para Membros da Igreja</h4>
+                  </div>
+                  <p className="mb-4">
+                    Conecte-se com sua comunidade de fé, compartilhe suas experiências devocionais e cresça em comunhão através de planos de leitura e desafios inspiradores.
+                  </p>
+                  <ul className="space-y-2 mt-4">
+                    <li className="flex items-start">
+                      <svg className="h-5 w-5 text-[#92A3FD] mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                        <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd"></path>
+                      </svg>
+                      <span>Mantenha uma rotina de leitura consistente</span>
+                    </li>
+                    <li className="flex items-start">
+                      <svg className="h-5 w-5 text-[#92A3FD] mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                        <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd"></path>
+                      </svg>
+                      <span>Receba encorajamento da sua comunidade</span>
+                    </li>
+                    <li className="flex items-start">
+                      <svg className="h-5 w-5 text-[#92A3FD] mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                        <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd"></path>
+                      </svg>
+                      <span>Acompanhe seu crescimento espiritual ao longo do tempo</span>
+                    </li>
+                  </ul>
+                </div>
+                
+                <div className="bg-white dark:bg-gray-900 p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 scroll-animate stagger-3">
+                  <div className="flex items-center mb-4">
+                    <div className="p-3 bg-purple-100 dark:bg-purple-900 rounded-full mr-4">
+                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6 text-purple-600 dark:text-purple-400">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 0 1 3 19.875v-6.75ZM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V8.625ZM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V4.125Z" />
+                      </svg>
+                    </div>
+                    <h4 className="text-xl font-medium">Para Pastores e Ministérios</h4>
+                  </div>
+                  <p className="mb-4">
+                    Amplie o alcance do seu ministério com ferramentas que promovem engajamento contínuo e fornecem insights sobre o crescimento espiritual da congregação.
+                  </p>
+                  <ul className="space-y-2 mt-4">
+                    <li className="flex items-start">
+                      <svg className="h-5 w-5 text-[#92A3FD] mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                        <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd"></path>
+                      </svg>
+                      <span>Crie programas de leitura para toda a igreja</span>
+                    </li>
+                    <li className="flex items-start">
+                      <svg className="h-5 w-5 text-[#92A3FD] mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                        <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd"></path>
+                      </svg>
+                      <span>Obtenha estatísticas de participação e engajamento</span>
+                    </li>
+                    <li className="flex items-start">
+                      <svg className="h-5 w-5 text-[#92A3FD] mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                        <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd"></path>
+                      </svg>
+                      <span>Coordene múltiplos grupos e líderes</span>
+                    </li>
+                  </ul>
+                </div>
+                
+                <div className="bg-white dark:bg-gray-900 p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 scroll-animate stagger-4">
+                  <div className="flex items-center mb-4">
+                    <div className="p-3 bg-red-100 dark:bg-red-900 rounded-full mr-4">
+                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6 text-red-600 dark:text-red-400">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M15.362 5.214A8.252 8.252 0 0 1 12 21 8.25 8.25 0 0 1 6.038 7.047 8.287 8.287 0 0 0 9 9.601a8.983 8.983 0 0 1 3.361-6.867 8.21 8.21 0 0 0 3 2.48Z" />
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M12 18a3.75 3.75 0 0 0 .495-7.468 5.99 5.99 0 0 0-1.925 3.547 5.975 5.975 0 0 1-2.133-1.001A3.75 3.75 0 0 0 12 18Z" />
+                      </svg>
+                    </div>
+                    <h4 className="text-xl font-medium">Para Seu Crescimento Pessoal</h4>
+                  </div>
+                  <p className="mb-4">
+                    Desenvolva um hábito de devoção diária com ferramentas que mantêm você motivado, responsável e conectado com Deus e com outros cristãos.
+                  </p>
+                  <ul className="space-y-2 mt-4">
+                    <li className="flex items-start">
+                      <svg className="h-5 w-5 text-[#92A3FD] mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                        <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd"></path>
+                      </svg>
+                      <span>Registre suas reflexões e acompanhe seu crescimento</span>
+                    </li>
+                    <li className="flex items-start">
+                      <svg className="h-5 w-5 text-[#92A3FD] mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                        <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd"></path>
+                      </svg>
+                      <span>Receba notificações e lembretes personalizados</span>
+                    </li>
+                    <li className="flex items-start">
+                      <svg className="h-5 w-5 text-[#92A3FD] mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                        <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd"></path>
+                      </svg>
+                      <span>Celebre suas conquistas espirituais</span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          {/* Community Section */}
+          <section className="mt-8 py-10 w-full bg-gray-50 dark:bg-gray-800 rounded-lg px-8 scroll-animate">
+            <h2 className="text-3xl font-semibold text-center mb-8">
+              Cresça junto com sua comunidade
+            </h2>
+            <div className="flex flex-col md:flex-row items-center justify-center gap-8">
+              <div className="md:w-1/2 max-w-md scroll-animate stagger-1">
+                <h3 className="text-xl font-medium mb-4">Devocionais que conectam</h3>
+                <ul className="space-y-2">
+                  <li className="flex items-center">
+                    <svg className="h-5 w-5 text-[#92A3FD] mr-2" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+                      <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd"></path>
+                    </svg>
+                    Compartilhe suas reflexões com o grupo
+                  </li>
+                  <li className="flex items-center">
+                    <svg className="h-5 w-5 text-[#92A3FD] mr-2" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+                      <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd"></path>
+                    </svg>
+                    Discuta versículos em tempo real
+                  </li>
+                  <li className="flex items-center">
+                    <svg className="h-5 w-5 text-[#92A3FD] mr-2" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+                      <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd"></path>
+                    </svg>
+                    Acompanhe o progresso da sua célula ou grupo
+                  </li>
+                </ul>
+              </div>
+              <div className="md:w-1/2 max-w-md mt-6 md:mt-0 scroll-animate stagger-2">
+                <h3 className="text-xl font-medium mb-4">Ferramentas para líderes</h3>
+                <ul className="space-y-2">
+                  <li className="flex items-center">
+                    <svg className="h-5 w-5 text-[#92A3FD] mr-2" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+                      <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd"></path>
+                    </svg>
+                    Crie planos de leitura personalizados
+                  </li>
+                  <li className="flex items-center">
+                    <svg className="h-5 w-5 text-[#92A3FD] mr-2" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+                      <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd"></path>
+                    </svg>
+                    Acompanhe a evolução dos participantes
+                  </li>
+                  <li className="flex items-center">
+                    <svg className="h-5 w-5 text-[#92A3FD] mr-2" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+                      <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd"></path>
+                    </svg>
+                    Organize desafios bíblicos em grupo
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div className="text-center mt-8 scroll-animate stagger-3">
+              <div dangerouslySetInnerHTML={renderMailerLiteButton("Quero participar do BibleRats")} />
+            </div>
+          </section>
+
+          {/* Como Funciona Section */}
+          <section className="mt-16 py-10 w-full bg-gray-50 dark:bg-gray-800 rounded-lg px-8 scroll-animate">
+            <h2 className="text-3xl font-semibold text-center mb-12">
+              Como Funciona
+            </h2>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+              <div className="flex flex-col items-center text-center scroll-animate stagger-1">
+                <div className="w-16 h-16 bg-gradient-primary text-white flex items-center justify-center rounded-full text-2xl font-bold mb-4 hover:scale-110 transition-transform duration-300">1</div>
+                <h3 className="text-xl font-medium mb-3">Crie sua conta</h3>
+                <p>Registre-se gratuitamente e convide sua comunidade ou entre em um grupo existente.</p>
+              </div>
+              <div className="flex flex-col items-center text-center scroll-animate stagger-2">
+                <div className="w-16 h-16 bg-gradient-primary text-white flex items-center justify-center rounded-full text-2xl font-bold mb-4 hover:scale-110 transition-transform duration-300">2</div>
+                <h3 className="text-xl font-medium mb-3">Escolha um plano</h3>
+                <p>Selecione entre os planos de leitura disponíveis ou crie um personalizado para seu grupo.</p>
+              </div>
+              <div className="flex flex-col items-center text-center scroll-animate stagger-3">
+                <div className="w-16 h-16 bg-gradient-primary text-white flex items-center justify-center rounded-full text-2xl font-bold mb-4 hover:scale-110 transition-transform duration-300">3</div>
+                <h3 className="text-xl font-medium mb-3">Cresça em comunidade</h3>
+                <p>Compartilhe reflexões, interaja com seu grupo e acompanhe o progresso de todos.</p>
+              </div>
+            </div>
+          </section>
+
+          {/* FAQ Section */}
+          <section className="mt-16 py-12 w-full scroll-animate">
+            <h2 className="text-3xl font-semibold text-center mb-12">
+              Perguntas Frequentes
+            </h2>
+            <div className="max-w-3xl mx-auto space-y-6">
+              <div className="bg-white dark:bg-gray-900 p-6 rounded-lg shadow-sm hover:shadow-md transition-shadow duration-300 scroll-animate stagger-1">
+                <h3 className="text-xl font-medium mb-3">O BibleRats é gratuito?</h3>
+                <p>Sim! O BibleRats oferece um plano gratuito com todas as funcionalidades principais. Existem planos premium com recursos adicionais para igrejas e ministérios maiores.</p>
+              </div>
+              
+              <div className="bg-white dark:bg-gray-900 p-6 rounded-lg shadow-sm hover:shadow-md transition-shadow duration-300 scroll-animate stagger-2">
+                <h3 className="text-xl font-medium mb-3">Preciso fazer parte de um grupo para usar o BibleRats?</h3>
+                <p>Nós acreditamos que Deus nos chama a viver em comunidade. Embora você possa usar o BibleRats individualmente, a experiência é muito mais rica quando compartilhada com seu grupo, célula ou igreja.</p>
+              </div>
+              
+              <div className="bg-white dark:bg-gray-900 p-6 rounded-lg shadow-sm hover:shadow-md transition-shadow duration-300 scroll-animate stagger-3">
+                <h3 className="text-xl font-medium mb-3">Quantas pessoas posso adicionar ao meu grupo?</h3>
+                <p>No plano gratuito, você pode adicionar até 15 pessoas em um grupo. Para grupos maiores, recomendamos os planos premium que oferecem capacidade ilimitada.</p>
+              </div>
+              
+              <div className="bg-white dark:bg-gray-900 p-6 rounded-lg shadow-sm hover:shadow-md transition-shadow duration-300 scroll-animate stagger-4">
+                <h3 className="text-xl font-medium mb-3">Preciso ter uma Bíblia para usar o BibleRats?</h3>
+                <p>Sim, o BibleRats é uma ferramenta para acompanhar sua leitura bíblica e compartilhar devocionais. Atualmente, você precisará ter sua própria Bíblia, seja física ou digital, para fazer as leituras. A integração com textos bíblicos está em nossos planos futuros.</p>
+              </div>
+              
+              <div className="bg-white dark:bg-gray-900 p-6 rounded-lg shadow-sm hover:shadow-md transition-shadow duration-300 scroll-animate stagger-5">
+                <h3 className="text-xl font-medium mb-3">Posso usar o BibleRats offline?</h3>
+                <p>Não, o BibleRats requer uma conexão com a internet para funcionar. Isso garante que você sempre tenha acesso aos devocionais mais recentes e possa interagir em tempo real com sua comunidade.</p>
+              </div>
+              
+              <div className="bg-white dark:bg-gray-900 p-6 rounded-lg shadow-sm hover:shadow-md transition-shadow duration-300 scroll-animate stagger-6">
+                <h3 className="text-xl font-medium mb-3">Como faço para criar um plano de leitura personalizado?</h3>
+                <p>Na área de administrador do grupo, selecione &ldquo;Novo Plano&rdquo;, escolha um Livro ou Tema bíblico, defina o período e escreva uma descrição para o plano. É simples e rápido!</p>
+              </div>
+            </div>
+          </section>
+
+          {/* CTA Section */}
+          <section className="mt-12 py-12 w-full bg-gradient-primary text-white rounded-lg px-8 text-center scroll-animate">
+            <h2 className="text-3xl font-bold mb-4">
+              Transforme sua experiência devocional hoje
+            </h2>
+            <p className="mb-8 max-w-2xl mx-auto text-lg">
+              Seja um dos primeiros a acessar o BibleRats e transforme sua experiência devocional junto com sua comunidade.
+            </p>
+            <div dangerouslySetInnerHTML={renderWhiteMailerLiteButton("Fazer pré-cadastro")} />
+          </section>
+        </main>
+
+        <footer className="mt-12 text-center w-full max-w-4xl py-6 scroll-animate">
+          <div className="flex justify-center space-x-4 mb-4">
+            <a href="/privacy" className="hover:underline transition-all duration-300">Política de Privacidade</a>
+            <a href="/terms" className="hover:underline transition-all duration-300">Termos de Uso</a>
+            <a href="/contact" className="hover:underline transition-all duration-300">Contato</a>
+          </div>
+          <p className="pt-2">© {new Date().getFullYear()} BibleRats. Todos os direitos reservados.</p>
+        </footer>
+      </div>
+    </>
   );
 }

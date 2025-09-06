@@ -6,16 +6,19 @@
   --background: #ffffff;
   --foreground: #171717;
   
-  --primary: #04BF9D;
+  --primary: #92A3FD;
+  --primary-light: #9DCEFF;
+  --primary-gradient: linear-gradient(to bottom right, #92A3FD, #9DCEFF);
 }
-
 
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;
     --foreground: #ededed;
 
-    --primary: #04BF9D;
+    --primary: #92A3FD;
+    --primary-light: #9DCEFF;
+    --primary-gradient: linear-gradient(to bottom right, #92A3FD, #9DCEFF);
   }
 }
 
@@ -33,4 +36,24 @@ a {
   .text-balance {
     text-wrap: balance;
   }
+}
+
+.bg-gradient-primary {
+  background: var(--primary-gradient);
+}
+
+.text-gradient {
+  background: var(--primary-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.hover-gradient {
+  background: var(--primary-gradient);
+  transition: opacity 0.3s ease;
+}
+
+.hover-gradient:hover {
+  opacity: 0.9;
 }
